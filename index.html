@@ -1375,20 +1375,20 @@ async function buildCard(k) {
   T(fmtClock(st.dur), 300, 200, 760, 'left', '#0E0E10', -12); T('DURATION', 28, 600, 820, 'left', 'rgba(14,14,16,.65)', 6);
   // بطاقة زجاجية سفلية
   const rr = (X, Y, w, h, r) => { x.beginPath(); x.moveTo(X + r, Y); x.arcTo(X + w, Y, X + w, Y + h, r); x.arcTo(X + w, Y + h, X, Y + h, r); x.arcTo(X, Y + h, X, Y, r); x.arcTo(X, Y, X + w, Y, r); x.closePath(); };
-  x.fillStyle = 'rgba(255,255,255,.72)'; rr(60, 900, 960, 900, 56); x.fill();
+  x.fillStyle = 'rgba(255,255,255,.72)'; rr(60, 900, 960, 975, 56); x.fill();
   const cols = [[`${st.done}/${st.total}`, 'SETS'], [fmtN(st.vol), 'VOLUME KG'], [effLbl(st.eff), 'EFFORT']];
-  cols.forEach(([v, l], i) => { const cx = 120 + i * 300; x.textAlign = 'left'; x.font = '300 74px Inter, Helvetica, sans-serif'; x.fillStyle = '#0E0E10'; x.fillText(v, cx, 1030); x.font = '600 24px Inter, Helvetica, sans-serif'; x.fillStyle = 'rgba(14,14,16,.55)'; if ('letterSpacing' in x) x.letterSpacing = '4px'; x.fillText(l, cx, 1075); if ('letterSpacing' in x) x.letterSpacing = '0px'; });
+  cols.forEach(([v, l], i) => { const cx = 120 + i * 290; x.textAlign = 'left'; let fs = 74; do { x.font = `300 ${fs}px Inter, Helvetica, sans-serif`; fs -= 2; } while (x.measureText(v).width > 262 && fs > 40); x.fillStyle = '#0E0E10'; x.fillText(v, cx, 1030); x.font = '600 24px Inter, Helvetica, sans-serif'; x.fillStyle = 'rgba(14,14,16,.55)'; if ('letterSpacing' in x) x.letterSpacing = '4px'; x.fillText(l, cx, 1075); if ('letterSpacing' in x) x.letterSpacing = '0px'; });
   x.fillStyle = 'rgba(14,14,16,.1)'; x.fillRect(120, 1120, 840, 2);
   let y = 1185; x.font = '600 24px Inter, Helvetica, sans-serif'; x.fillStyle = 'rgba(14,14,16,.55)'; if ('letterSpacing' in x) x.letterSpacing = '4px'; x.fillText('TOP LIFTS', 120, y); if ('letterSpacing' in x) x.letterSpacing = '0px';
-  const tops = st.tops.slice(0, 5); y += 62;
+  const tops = st.tops.slice(0, 5); y += 58;
   if (!tops.length) { x.font = '400 36px Inter, Helvetica, sans-serif'; x.fillStyle = '#0E0E10'; x.fillText('Bodyweight & core work', 120, y); y += 60; }
   for (const t of tops) { x.font = '400 36px Inter, Helvetica, sans-serif'; x.fillStyle = '#0E0E10'; x.textAlign = 'left'; let n = t.en; while (x.measureText(n).width > 560 && n.length > 4) n = n.slice(0, -2); if (n !== t.en) n += '…'; x.fillText(n, 120, y); x.textAlign = 'right'; x.font = '500 38px Inter, Helvetica, sans-serif'; x.fillText(`${t.w} kg × ${t.r || '-'}`, 960, y); y += 62; }
   const songs = (s.songs || []).slice(-3);
   if (songs.length) { y += 20; x.textAlign = 'left'; x.font = '600 24px Inter, Helvetica, sans-serif'; x.fillStyle = 'rgba(14,14,16,.55)'; if ('letterSpacing' in x) x.letterSpacing = '4px'; x.fillText('♪ ON REPEAT', 120, y); if ('letterSpacing' in x) x.letterSpacing = '0px'; y += 56;
     for (const sg of songs) { x.font = '400 32px Inter, Helvetica, "Geeza Pro", sans-serif'; x.fillStyle = '#0E0E10'; let n = sg.t; while (x.measureText(n).width > 820 && n.length > 4) n = n.slice(0, -2); x.fillText(n, 120, y); y += 50; } }
-  if (s.cardio?.ok) { const cx = CARDIO.find(z => z.id === s.cardio.id); x.textAlign = 'left'; x.font = '600 24px Inter, Helvetica, sans-serif'; x.fillStyle = 'rgba(14,14,16,.55)'; if ('letterSpacing' in x) x.letterSpacing = '4px'; x.fillText('CARDIO', 120, 1700); if ('letterSpacing' in x) x.letterSpacing = '0px'; x.font = '500 34px Inter, Helvetica, sans-serif'; x.fillStyle = '#0E0E10'; x.textAlign = 'right'; x.fillText(`${cx.en} · ${s.cardio.min} min`, 960, 1700); }
+  if (s.cardio?.ok) { const cx = CARDIO.find(z => z.id === s.cardio.id); y += 18; x.textAlign = 'left'; x.font = '600 24px Inter, Helvetica, sans-serif'; x.fillStyle = 'rgba(14,14,16,.55)'; if ('letterSpacing' in x) x.letterSpacing = '4px'; x.fillText('CARDIO', 120, y); if ('letterSpacing' in x) x.letterSpacing = '0px'; x.font = '500 34px Inter, Helvetica, sans-serif'; x.fillStyle = '#0E0E10'; x.textAlign = 'right'; x.fillText(`${cx.en} · ${s.cardio.min} min`, 960, y); y += 50; }
   const extra = [D.steps ? `${fmtN(D.steps)} STEPS` : '', D.water ? `${(D.water / 1000).toFixed(1)} L WATER` : ''].filter(Boolean).join('   ·   ');
-  if (extra) { x.textAlign = 'left'; x.font = '500 28px Inter, Helvetica, sans-serif'; x.fillStyle = 'rgba(14,14,16,.7)'; x.fillText(extra, 120, 1760); }
+  if (extra) { x.textAlign = 'left'; x.font = '500 28px Inter, Helvetica, sans-serif'; x.fillStyle = 'rgba(14,14,16,.7)'; x.fillText(extra, 120, Math.max(y + 20, 1740)); }
   return c;
 }
 async function shareCard(k) {
