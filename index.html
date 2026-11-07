@@ -577,10 +577,11 @@ const GUIDE = [
    ].map(([h, it]) => `<details class="acc sub"><summary>${h}</summary><div class="acc-b">${L(it)}</div></details>`).join('') },
 
  /* ---------------- الأكل ---------------- */
- { g:'الأكل', id:'client', ic:'🎯', t:'أهدافك اليومية', s:'1600 سعرة · 130غ بروتين', html:
-   `   <div class="stats" style="grid-template-columns:repeat(4,1fr)"><div><b>1600</b><span>سعرة/يوم</span></div><div><b>130g</b><span>بروتين</span></div><div><b>146g</b><span>كارب</span></div><div><b>55g</b><span>دهون</span></div></div>`
-   + NOTE('السعرات محسوبة بعجز معتدل عن سعرات الصيانة، عشان النزول يكون ثابت بدون حرمان.')
-   + NOTE('💌 <b>من المدربة:</b> جدول 1600 سعرة ببروتين 130 بدون حرمان، والبطن السفلية تنزل بالأكل أول، والكور بكل جلسة يشدها تحت.') },
+ { g:'الأكل', id:'client', ic:'🎯', t:'أرقامك وهدفك', s:'1600 سعرة · 130غ بروتين', html:
+   `<div class="stats" style="margin-bottom:10px"><div><b>69.5</b><span>الوزن كجم</span></div><div><b>160</b><span>الطول سم</span></div><div><b>28</b><span>العمر</span></div></div>
+   <div class="stats" style="grid-template-columns:repeat(4,1fr)"><div><b>1600</b><span>سعرة/يوم</span></div><div><b>130g</b><span>بروتين</span></div><div><b>146g</b><span>كارب</span></div><div><b>55g</b><span>دهون</span></div></div>`
+   + NOTE('سعرات الصيانة التقريبية 1917 · عجز 317 سعرة (17%) عن الصيانة.')
+   + NOTE('💌 <b>رسالة المدربة:</b> هلا شهد، 14 كيلو تنزل خلال 5 إلى 6 شهور بجدول 1600 سعرة ببروتين 130 بدون حرمان، والبطن السفلية تنزل بالأكل أول، والكور بكل جلسة يشدها تحت.') },
  { g:'الأكل', id:'howread', ic:'📖', t:'كيف تقرئين الجدول', s:'الأوزان والتبديل والمفتوح', html: L([
    ['⚖️ الأوزان بالجرام','كل الكميات بالجرام على ميزان المطبخ. الدجاج واللحم والسمك مكتوب جنبها (وزن نيء) أو (وزن مطبوخ)، والرز والمكرونة مكتوب (مطبوخ) إذا كان الوزن بعد الطبخ. بدون علامة يعني الوزن كما تشترينه.'],
    ['🥄 معايير تقريبية بدون ميزان','100غ دجاج مطبوخ = كف اليد · 150غ رز مطبوخ = كوب مضغوط · 100غ مكرونة مطبوخة = كوب إلا ربع · 30غ جبن = حجم الإبهام · ملعقة أكل زيت = 14غ · بيضة = 50غ.'],
@@ -623,7 +624,7 @@ const GUIDE = [
    ['📦 أخرى',[['شوكولاتة داكنة','8غ'],['ملوخية','120غ'],['كاري','6غ']]],
    ].map(([h, r]) => `<h4>${h}</h4>${T(r.map(([a, b]) => [`<label class="shopck"><input type="checkbox"> ${a}</label>`, b]))}`).join('') },
  { g:'الأكل', id:'final', ic:'💚', t:'رسالة أخيرة من المدربة', s:'وتذكري دايمًا', html:
-   NOTE('نص إلى 700 جرام بالأسبوع، الوزن مرة بالأسبوع وقيسي الخصر كل أسبوعين، وأرسلي لي كل أسبوع.')
+   NOTE('شهد، نص إلى 700 جرام بالأسبوع، الوزن مرة بالأسبوع وقيسي الخصر كل أسبوعين، وأرسلي لي كل أسبوع.')
    + `<h4>تذكري دايمًا</h4><ol class="ol"><li>النوم الكافي (7-8 ساعات) جزء من النظام ما يقل أهمية عن الأكل.</li><li>الحركة اليومية ولو مشي نص ساعة تسرّع النتايج.</li><li>يوم واحد خارج الخطة ما يخرب أسبوع التزام.</li><li>قيسي تقدمك بالملابس وطاقتك، مو بالميزان وحده.</li></ol>
    <p class="hint" style="margin-top:12px">في صفحة «التقدّم» زر ينسخ لك ملخص الأسبوع جاهز ترسلينه للمدربة.</p>` },
  { g:'عام', id:'contact', ic:'📱', t:'التواصل مع المدربة', s:'ZahraaFit', html:
@@ -1028,7 +1029,7 @@ function header(kick, title) {
 function viewToday() {
   const k = UI.sel, t = todayKey(), D = peek(k);
   const hr = new Date().getHours();
-  const nm = (S.settings.name || '').trim(); const greet = (hr < 12 ? 'صباح الخيـر' : 'مساء الخيـر') + (nm ? '، ' + esc(nm) : '');
+  const nm = (S.settings.name || 'شهـد').trim(); const greet = (hr < 12 ? 'صباح الخيـر' : 'مساء الخيـر') + (nm ? '، ' + esc(nm) : '');
   const title = k === t ? 'اليـوم' : DAYS_K[dOf(k).getDay()];
   // شريط الأسبوع
   const d0 = dOf(k); const wkStart = addDays(k, -d0.getDay());
@@ -1652,7 +1653,7 @@ function settingsSheet() {
     c.body.innerHTML = `
       <div class="card"><h3>راحة بين الجولات</h3><p class="hint" style="margin:4px 0 10px">العداد اللي يطلع بعد كل جولة. المدربة: 60-90 ث للعزل، 90-120 للأساسية.</p>
         <div class="seg">${[45, 60, 90, 120].map(n => `<button class="${st.restSec === n ? 'on' : ''}" data-r="${n}">${n}ث</button>`).join('')}</div></div>
-      <div class="card"><h3>اسمك</h3><p class="hint" style="margin:4px 0 10px">يظهر في التحية فوق. ينحفظ على جوالك بس.</p><div class="field" style="background:#F4F5F7;margin:0"><input id="uName" value="${esc(st.name || '')}" placeholder="اكتبي اسمك"></div></div>
+      <div class="card"><h3>اسمك</h3><p class="hint" style="margin:4px 0 10px">يظهر في التحية فوق. ينحفظ على جوالك بس.</p><div class="field" style="background:#F4F5F7;margin:0"><input id="uName" value="${esc(st.name || 'شهد')}" placeholder="اكتبي اسمك"></div></div>
       <div class="card"><h3>بداية البرنامج</h3><p class="hint" style="margin:4px 0 10px">التمارين والجدول الغذائي (يوم 1) يبدؤون من هذا التاريخ.</p><div class="field" style="background:#F4F5F7;margin:0"><label>التاريخ</label><input type="date" id="pStart" value="${st.programStart || ''}"></div></div>
       <div class="card"><h3>روتين الكور</h3><div class="seg" style="margin-top:10px"><button class="${st.coreMode === 'daily' ? 'on' : ''}" data-c="daily">كل يوم</button><button class="${st.coreMode === 'gym' ? 'on' : ''}" data-c="gym">أيام النادي</button></div></div>
       <div class="card"><h3>الأهداف</h3>
@@ -1660,7 +1661,7 @@ function settingsSheet() {
         <button class="pill dark sm" id="gSave">حفظ الأهداف</button></div>
       <div class="card"><h3>النسخة الاحتياطية</h3><p class="hint" style="margin:4px 0 10px">${Store.mode === 'cloud' ? 'بياناتك محفوظة في حسابك على Claude وتطلع لك من أي جهاز تفتحين منه الصفحة. ' : 'بياناتك محفوظة على هذا الجهاز. '}صدّري نسخة كل فترة للاحتياط.</p>
         <div class="row2"><button class="pill ghost" style="background:#F2F3F5" id="exp">تصدير</button><label class="pill ghost" style="background:#F2F3F5">استيراد<input type="file" accept="application/json,.json" id="imp" hidden></label></div></div>
-      <p class="hint" style="text-align:center">let's go! · برنامج ZahraaFit<br>«الالتزام أهم من الحماس»</p>`;
+      <p class="hint" style="text-align:center">let's go! · برنامج ZahraaFit لشهد<br>«الالتزام أهم من الحماس»</p>`;
     $$('[data-r]', c.el).forEach(b => b.onclick = () => { st.restSec = Number(b.dataset.r); Store.touch('settings'); draw(c); });
     $$('[data-c]', c.el).forEach(b => b.onclick = () => { st.coreMode = b.dataset.c; Store.touch('settings'); draw(c); render(); });
     $('#pStart').onchange = e => { const v = e.target.value; if (!v) return; st.programStart = v; st.mealStart = v; st.mealOv = {}; Store.touch('settings'); render(); toast('تم ✓'); };
