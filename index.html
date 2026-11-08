@@ -337,6 +337,13 @@ input,textarea,select{font:inherit;color:inherit}
 .ctile small{font-size:11px;color:var(--mut)}
 .ctile.on{border-color:var(--ink);background:#fff}
 
+.bgpick{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 8px;margin-bottom:6px;scrollbar-width:none}
+.bgpick::-webkit-scrollbar{display:none}
+.bgpick button{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11.5px;color:var(--mut)}
+.bgpick i{width:50px;height:50px;border-radius:16px;display:block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.bgpick button.on i{box-shadow:0 0 0 2.5px var(--bg),0 0 0 4.5px var(--ink)}
+.bgpick button.on span{color:var(--ink);font-weight:600}
+
 </style>
 </head>
 <body>
@@ -1358,6 +1365,17 @@ function summarySheet(k) {
     <button class="pill dark block" style="margin-top:12px" onclick="A.shareCard('${k}')">${I.share} صورة للستوري</button>
     <button class="pill block" style="margin-top:8px" onclick="A.reopen('${k}')">تعديل الجولات</button>`);
 }
+const CARD_BG = {
+  auto: { n: 'حسب اليوم' },
+  peach: { n: 'خوخي', bg: '#EEEDEA', c: ['rgba(255,106,61,1)', 'rgba(61,107,255,.95)', 'rgba(255,201,168,1)'] },
+  pink: { n: 'وردي', bg: '#EEEDEA', c: ['rgba(91,124,255,1)', 'rgba(255,143,199,.95)', 'rgba(200,212,255,1)'] },
+  sunset: { n: 'غروب', bg: '#EEEDEA', c: ['rgba(255,122,61,1)', 'rgba(255,210,77,.95)', 'rgba(255,77,141,.9)'] },
+  lilac: { n: 'ليلكي', bg: '#EEEDEA', c: ['rgba(142,108,255,1)', 'rgba(255,106,154,.95)', 'rgba(107,197,255,.9)'] },
+  lime: { n: 'ليموني', bg: '#EDEDE6', c: ['rgba(198,244,50,1)', 'rgba(52,199,89,.75)', 'rgba(255,201,77,.95)'] },
+  dark: { n: 'داكن', bg: '#141416', dark: 1, c: ['rgba(255,106,61,.85)', 'rgba(61,107,255,.75)', 'rgba(255,143,199,.55)'] },
+};
+const AUTO_BG = { d1: 'peach', d2: 'pink', d3: 'sunset', d4: 'lilac' };
+const workoutNo = k => Object.keys(S.days).filter(d => d <= k && isDone(d)).length;
 const splitSong = t => { const m = String(t || '').split(/\s+[—–-]\s+/); return { title: (m[0] || '').trim(), artist: (m.slice(1).join(' - ') || '').trim() }; };
 async function buildCard(k, opt = {}) {
   const s = sessionOf(k), st = sessionStats(k), W = WORKOUTS[s.w], D = peek(k);
@@ -1367,13 +1385,15 @@ async function buildCard(k, opt = {}) {
   const c = document.createElement('canvas'); c.width = 1080; c.height = 1920; const x = c.getContext('2d');
   x.fillStyle = '#EEEDEA'; x.fillRect(0, 0, 1080, 1920);
   const blob = (cx, cy, r, col) => { const g = x.createRadialGradient(cx, cy, 0, cx, cy, r); g.addColorStop(0, col); g.addColorStop(1, col.replace(/[\d.]+\)$/, '0)')); x.fillStyle = g; x.fillRect(0, 0, 1080, 1920); };
-  const pal = { d1: ['rgba(255,106,61,1)', 'rgba(61,107,255,.95)', 'rgba(255,201,168,1)'], d2: ['rgba(91,124,255,1)', 'rgba(255,143,199,.95)', 'rgba(200,212,255,1)'], d3: ['rgba(255,122,61,1)', 'rgba(255,210,77,.95)', 'rgba(255,77,141,.9)'], d4: ['rgba(142,108,255,1)', 'rgba(255,106,154,.95)', 'rgba(107,197,255,.9)'] }[s.w];
+  const P = CARD_BG[(!opt.bg || opt.bg === 'auto') ? AUTO_BG[s.w] : opt.bg] || CARD_BG.peach, pal = P.c, DK = !!P.dark;
+  const INK = DK ? '#FFFFFF' : '#0E0E10', MUT = a => DK ? `rgba(255,255,255,${a})` : `rgba(14,14,16,${a})`, GLASS = DK ? 'rgba(255,255,255,.1)' : 'rgba(255,255,255,.62)';
+  x.fillStyle = P.bg; x.fillRect(0, 0, 1080, 1920);
   if (style === 'minimal') { blob(540, 980, 760, pal[0]); blob(200, 520, 560, pal[1]); blob(880, 1380, 560, pal[2]); blob(860, 300, 420, pal[1]); }
   else { blob(820, 520, 620, pal[0]); blob(180, 300, 520, pal[1]); blob(540, 820, 480, pal[2]); blob(980, 140, 360, pal[1]); }
   const im = x.getImageData(0, 0, 1080, 1920), dd = im.data; for (let i = 0; i < dd.length; i += 4) { const n = (Math.random() - .5) * 22; dd[i] += n; dd[i + 1] += n; dd[i + 2] += n; } x.putImageData(im, 0, 0);
   const F = (w, px) => { x.font = `${w} ${px}px Inter, Helvetica, Arial, sans-serif`; };
   const LS = v => { if ('letterSpacing' in x) x.letterSpacing = v + 'px'; };
-  const T = (t, w, px, X, Y, al = 'left', col = '#0E0E10', ls = 0) => { F(w, px); x.fillStyle = col; x.textAlign = al; LS(ls); x.fillText(t, X, Y); LS(0); };
+  const T = (t, w, px, X, Y, al = 'left', col = INK, ls = 0) => { F(w, px); x.fillStyle = col; x.textAlign = al; LS(ls); x.fillText(t, X, Y); LS(0); };
   const fit = (t, w, px, max, min = 28) => { do { F(w, px); px -= 2; } while (x.measureText(t).width > max && px > min); return px + 2; };
   const clip = (t, max) => { let n = t; while (x.measureText(n).width > max && n.length > 2) n = n.slice(0, -1); return n === t ? t : n.trim() + '…'; };
   const rr = (X, Y, w, h, r) => { x.beginPath(); x.moveTo(X + r, Y); x.arcTo(X + w, Y, X + w, Y + h, r); x.arcTo(X + w, Y + h, X, Y + h, r); x.arcTo(X, Y + h, X, Y, r); x.arcTo(X, Y, X + w, Y, r); x.closePath(); };
@@ -1383,51 +1403,51 @@ async function buildCard(k, opt = {}) {
     x.fillStyle = glass; rr(60, Y, 960, H, 48); x.fill();
     // cover
     const g = x.createLinearGradient(100, Y + 40, 260, Y + 200); g.addColorStop(0, pal[0]); g.addColorStop(1, pal[1]); x.fillStyle = g; rr(100, Y + 40, 160, 160, 28); x.fill();
-    x.fillStyle = 'rgba(255,255,255,.9)'; F(600, 72); x.textAlign = 'center'; x.fillText('♪', 180, Y + 146);
-    T('SONG OF THE DAY', 600, 22, 296, Y + 78, 'left', 'rgba(14,14,16,.55)', 4);
+    x.fillStyle = 'rgba(255,255,255,.95)'; F(600, 72); x.textAlign = 'center'; x.fillText('♪', 180, Y + 146);
+    T('SONG OF THE DAY', 600, 22, 296, Y + 78, 'left', MUT(.55), 4);
     const sp = splitSong(song.t); const tp = fit(sp.title, 600, 50, 680, 34);
-    F(600, tp); x.fillStyle = '#0E0E10'; x.textAlign = 'left'; x.fillText(clip(sp.title, 680), 296, Y + 138);
-    if (sp.artist) { F(400, 34); x.fillStyle = 'rgba(14,14,16,.65)'; x.fillText(clip(sp.artist, 680), 296, Y + 186); }
+    F(600, tp); x.fillStyle = INK; x.textAlign = 'left'; x.fillText(clip(sp.title, 680), 296, Y + 138);
+    if (sp.artist) { F(400, 34); x.fillStyle = MUT(.65); x.fillText(clip(sp.artist, 680), 296, Y + 186); }
     // progress bar like now playing
-    x.fillStyle = 'rgba(14,14,16,.12)'; rr(100, Y + 236, 880, 8, 4); x.fill(); x.fillStyle = '#0E0E10'; rr(100, Y + 236, 560, 8, 4); x.fill();
+    x.fillStyle = MUT(.12); rr(100, Y + 236, 880, 8, 4); x.fill(); x.fillStyle = INK; rr(100, Y + 236, 560, 8, 4); x.fill();
     x.beginPath(); x.arc(660, Y + 240, 13, 0, Math.PI * 2); x.fill();
-    T('♥  on repeat', 500, 22, 100, Y + 286, 'left', 'rgba(14,14,16,.5)'); T(`${songs.length} ${songs.length === 1 ? 'song' : 'songs'} this session`, 500, 22, 980, Y + 286, 'right', 'rgba(14,14,16,.5)');
+    T('♥  on repeat', 500, 22, 100, Y + 286, 'left', MUT(.5)); T(`${songs.length} ${songs.length === 1 ? 'song' : 'songs'} this session`, 500, 22, 980, Y + 286, 'right', MUT(.5));
   };
   if (style === 'minimal') {
-    T('WORKOUT LOG', 600, 28, 540, 170, 'center', 'rgba(14,14,16,.6)', 8);
-    T(dateTxt, 500, 30, 540, 220, 'center', 'rgba(14,14,16,.6)', 2);
+    T('WORKOUT LOG', 600, 28, 540, 170, 'center', MUT(.6), 8);
+    T(dateTxt, 500, 30, 540, 220, 'center', MUT(.6), 2);
     const dur = fmtClock(st.dur); const dp = fit(dur, 200, 340, 960, 180);
-    T(dur, 200, dp, 540, 760, 'center', '#0E0E10', -10);
-    T(W.en, 800, 96, 540, 900, 'center', '#0E0E10', -2);
-    T(W_EN_SUB[s.w], 400, 40, 540, 960, 'center', 'rgba(14,14,16,.7)');
-    const bits = [`${st.done}/${st.total} SETS`, `${fmtN(st.vol)} KG`, effLbl(st.eff).toUpperCase()]; if (cx) bits.push(`${s.cardio.min} MIN CARDIO`);
-    const line = bits.join('   ·   '); LS(3); const lp = fit(line, 600, 30, 840, 20); LS(0); T(line, 600, lp, 540, 1060, 'center', 'rgba(14,14,16,.75)', 3);
-    if (song) songCard(1400, 320, 'rgba(255,255,255,.55)');
+    T(dur, 200, dp, 540, 760, 'center', INK, -10);
+    T(W.en, 800, 110, 540, 910, 'center', INK, -2);
+    const cols = [[`${st.done}/${st.total}`, 'SETS'], [fmtN(st.vol), 'KG LIFTED']]; if (cx) cols.push([`${s.cardio.min}`, 'MIN CARDIO']); cols.push([`#${workoutNo(k)}`, 'WORKOUT']);
+    const cw = 920 / cols.length; cols.forEach(([v, l], i) => { const X = 80 + cw * i + cw / 2; const p = fit(v, 300, 64, cw - 24, 36); T(v, 300, p, X, 1050, 'center', INK, -1); T(l, 600, 20, X, 1090, 'center', MUT(.6), 4); if (i) { x.fillStyle = MUT(.15); x.fillRect(80 + cw * i, 1000, 2, 100); } });
+    if (song) songCard(1400, 320, GLASS);
   } else {
-    T('WORKOUT LOG', 600, 30, 80, 150, 'left', 'rgba(14,14,16,.7)', 6); T(dateTxt, 500, 30, 1000, 150, 'right', 'rgba(14,14,16,.7)', 2);
-    T(W.en, 700, 128, 80, 330, 'left', '#0E0E10', -3); T(W_EN_SUB[s.w], 400, 42, 80, 395, 'left', 'rgba(14,14,16,.75)');
-    T(fmtClock(st.dur), 200, 300, 80, 760, 'left', '#0E0E10', -12); T('TOTAL TIME', 600, 28, 80, 820, 'left', 'rgba(14,14,16,.65)', 6);
+    T('WORKOUT LOG', 600, 30, 80, 150, 'left', MUT(.7), 6); T(dateTxt, 500, 30, 1000, 150, 'right', MUT(.7), 2);
+    T(W.en, 700, 128, 80, 330, 'left', INK, -3);
+    T(fmtClock(st.dur), 200, 300, 80, 760, 'left', INK, -12); T('TOTAL TIME', 600, 28, 80, 820, 'left', MUT(.65), 6);
     // totals grid 2x2
-    x.fillStyle = 'rgba(255,255,255,.72)'; rr(60, 900, 960, 440, 56); x.fill();
-    const cells = [[`${st.done}/${st.total}`, 'SETS DONE'], [fmtN(st.vol), 'KG LIFTED'], [effLbl(st.eff), 'EFFORT'], [cx ? `${s.cardio.min} min` : '—', cx ? 'CARDIO · ' + cx.en.toUpperCase() : 'CARDIO']];
-    cells.forEach(([v, l], i) => { const X = 120 + (i % 2) * 450, Y = 1040 + Math.floor(i / 2) * 200; const p = fit(v, 300, 96, 390, 50); T(v, 300, p, X, Y, 'left', '#0E0E10', -3); F(600, 22); x.fillStyle = 'rgba(14,14,16,.55)'; LS(4); x.fillText(clip(l, 390), X, Y + 50); LS(0); });
-    x.fillStyle = 'rgba(14,14,16,.1)'; x.fillRect(540, 960, 2, 360); x.fillRect(120, 1130, 840, 2);
-    if (song) songCard(1450, 320, 'rgba(255,255,255,.72)');
+    x.fillStyle = GLASS; rr(60, 900, 960, 440, 56); x.fill();
+    const cells = [[`${st.done}/${st.total}`, 'SETS DONE'], [fmtN(st.vol), 'KG LIFTED'], [cx ? `${s.cardio.min} min` : '—', cx ? 'CARDIO · ' + cx.en.toUpperCase() : 'CARDIO'], [`#${workoutNo(k)}`, 'WORKOUT']];
+    cells.forEach(([v, l], i) => { const X = 120 + (i % 2) * 450, Y = 1040 + Math.floor(i / 2) * 200; const p = fit(v, 300, 96, 390, 50); T(v, 300, p, X, Y, 'left', INK, -3); F(600, 22); x.fillStyle = MUT(.55); LS(4); x.fillText(clip(l, 390), X, Y + 50); LS(0); });
+    x.fillStyle = MUT(.12); x.fillRect(540, 960, 2, 360); x.fillRect(120, 1130, 840, 2);
+    if (song) songCard(1450, 320, GLASS);
   }
-  const extra = [D.steps ? `${fmtN(D.steps)} STEPS` : '', D.water ? `${(D.water / 1000).toFixed(1)} L WATER` : ''].filter(Boolean).join('   ·   ');
-  if (extra) T(extra, 500, 28, style === 'minimal' ? 540 : 80, 1840, style === 'minimal' ? 'center' : 'left', 'rgba(14,14,16,.6)', 3);
   return c;
 }
 async function shareCard(k) {
   const s = sessionOf(k), songs = s.songs || [];
-  const opt = { style: S.settings.cardStyle || 'summary', song: songs.length ? songs.length - 1 : null };
+  const opt = { style: S.settings.cardStyle || 'minimal', bg: S.settings.cardBg || 'auto', song: songs.length ? songs.length - 1 : null };
   const fname = `workout-${k}.png`;
   openSheet('صـورة الستـوري', '', async ctl => {
     const draw = async () => {
-      ctl.body.innerHTML = `<div class="seg" style="margin-bottom:12px"><button class="${opt.style === 'summary' ? 'on' : ''}" data-st="summary">ملخص</button><button class="${opt.style === 'minimal' ? 'on' : ''}" data-st="minimal">بسيط</button></div>
+      ctl.body.innerHTML = `<div class="seg" style="margin-bottom:12px"><button class="${opt.style === 'minimal' ? 'on' : ''}" data-st="minimal">بسيط</button><button class="${opt.style === 'summary' ? 'on' : ''}" data-st="summary">ملخص</button></div>
+        <div style="font-size:13px;color:var(--mut);margin:0 4px 6px">الخلفية</div>
+        <div class="bgpick">${Object.entries(CARD_BG).map(([id, b]) => { const bb = id === 'auto' ? CARD_BG[AUTO_BG[s.w]] : b; return `<button class="${opt.bg === id ? 'on' : ''}" data-bg="${id}"><i style="background:radial-gradient(circle at 30% 30%, ${bb.c[1]}, transparent 60%), radial-gradient(circle at 75% 70%, ${bb.c[0]}, transparent 65%), ${bb.bg}"></i><span>${b.n}</span></button>`; }).join('')}</div>
         ${songs.length > 1 ? `<div style="font-size:13px;color:var(--mut);margin:0 4px 6px">أغنية اليوم</div><div class="chips" style="margin-bottom:12px">${songs.map((z, i) => `<button class="chip ${opt.song === i ? 'on' : ''}" data-sg="${i}">${esc(splitSong(z.t).title)}</button>`).join('')}</div>` : songs.length ? '' : '<p class="hint" style="margin:0 4px 10px">ما أضفتي أغاني لهالتمرين. أضيفيها من شاشة التمرين («أغاني التمرين») وتطلع هنا كأغنية اليوم.</p>'}
         <div class="empty" id="prv">جاري التجهيز…</div>`;
       $$('[data-st]', ctl.el).forEach(b => b.onclick = () => { opt.style = b.dataset.st; S.settings.cardStyle = opt.style; Store.touch('settings'); draw(); });
+      $$('[data-bg]', ctl.el).forEach(b => b.onclick = () => { opt.bg = b.dataset.bg; S.settings.cardBg = opt.bg; Store.touch('settings'); draw(); });
       $$('[data-sg]', ctl.el).forEach(b => b.onclick = () => { opt.song = Number(b.dataset.sg); draw(); });
       const cv = await buildCard(k, opt); const url = cv.toDataURL('image/png'); const blob = await new Promise(r => cv.toBlob(r, 'image/png'));
       const file = new File([blob], fname, { type: 'image/png' });
