@@ -344,6 +344,10 @@ input,textarea,select{font:inherit;color:inherit}
 .bgpick button.on i{box-shadow:0 0 0 2.5px var(--bg),0 0 0 4.5px var(--ink)}
 .bgpick button.on span{color:var(--ink);font-weight:600}
 
+.prev-wrap{border-radius:22px;overflow:hidden}
+.prev-wrap.checker{background:repeating-conic-gradient(#d9dbe0 0 25%,#f3f4f6 0 50%) 0 0/22px 22px;padding:0}
+.prev-wrap .share-prev{box-shadow:none;border-radius:0}
+
 </style>
 </head>
 <body>
@@ -1385,12 +1389,28 @@ async function buildCard(k, opt = {}) {
   const c = document.createElement('canvas'); c.width = 1080; c.height = 1920; const x = c.getContext('2d');
   x.fillStyle = '#EEEDEA'; x.fillRect(0, 0, 1080, 1920);
   const blob = (cx, cy, r, col) => { const g = x.createRadialGradient(cx, cy, 0, cx, cy, r); g.addColorStop(0, col); g.addColorStop(1, col.replace(/[\d.]+\)$/, '0)')); x.fillStyle = g; x.fillRect(0, 0, 1080, 1920); };
-  const P = CARD_BG[(!opt.bg || opt.bg === 'auto') ? AUTO_BG[s.w] : opt.bg] || CARD_BG.peach, pal = P.c, DK = !!P.dark;
-  const INK = DK ? '#FFFFFF' : '#0E0E10', MUT = a => DK ? `rgba(255,255,255,${a})` : `rgba(14,14,16,${a})`, GLASS = DK ? 'rgba(255,255,255,.1)' : 'rgba(255,255,255,.62)';
-  x.fillStyle = P.bg; x.fillRect(0, 0, 1080, 1920);
-  if (style === 'minimal') { blob(540, 980, 760, pal[0]); blob(200, 520, 560, pal[1]); blob(880, 1380, 560, pal[2]); blob(860, 300, 420, pal[1]); }
+  const shape = opt.shape || 'full', photo = shape === 'photo' ? opt.photo : null;
+  const P = CARD_BG[(!opt.bg || opt.bg === 'auto') ? AUTO_BG[s.w] : opt.bg] || CARD_BG.peach, pal = P.c, DK = shape === 'photo' ? true : shape === 'glass' ? false : !!P.dark;
+  const INK = DK ? '#FFFFFF' : '#0E0E10', MUT = a => DK ? `rgba(255,255,255,${a})` : `rgba(14,14,16,${a})`, GLASS = shape === 'photo' ? 'rgba(255,255,255,.14)' : shape === 'glass' ? 'rgba(255,255,255,.55)' : DK ? 'rgba(255,255,255,.1)' : 'rgba(255,255,255,.62)';
+  x.clearRect(0, 0, 1080, 1920);
+  const CR = { x: 44, y: 64, w: 992, h: 1792, r: 84 };
+  const cardPath = () => { const { x: X, y: Y, w, h, r } = CR; x.beginPath(); x.moveTo(X + r, Y); x.arcTo(X + w, Y, X + w, Y + h, r); x.arcTo(X + w, Y + h, X, Y + h, r); x.arcTo(X, Y + h, X, Y, r); x.arcTo(X, Y, X + w, Y, r); x.closePath(); };
+  const cover = (img, ctx, W2, H2) => { const sc = Math.max(W2 / img.width, H2 / img.height), w = img.width * sc, h = img.height * sc; ctx.drawImage(img, (W2 - w) / 2, (H2 - h) / 2, w, h); };
+  if (photo) {
+    cover(photo, x, 1080, 1920);
+    const sm = document.createElement('canvas'); sm.width = 54; sm.height = 96; const sx = sm.getContext('2d'); sx.imageSmoothingQuality = 'high'; cover(photo, sx, 54, 96);
+    const md = document.createElement('canvas'); md.width = 216; md.height = 384; const mx = md.getContext('2d'); mx.imageSmoothingQuality = 'high'; mx.drawImage(sm, 0, 0, 216, 384);
+    x.save(); cardPath(); x.clip(); x.imageSmoothingQuality = 'high'; x.drawImage(md, 0, 0, 1080, 1920); x.fillStyle = 'rgba(10,10,14,.30)'; x.fillRect(0, 0, 1080, 1920); x.restore();
+  } else {
+    if (shape !== 'full') { x.save(); cardPath(); x.clip(); }
+    if (shape === 'glass') { x.fillStyle = 'rgba(255,255,255,.56)'; x.fillRect(0, 0, 1080, 1920); x.globalAlpha = .45; }
+    else { x.fillStyle = P.bg; x.fillRect(0, 0, 1080, 1920); }
+  }
+  if (photo) { } else if (style === 'minimal') { blob(540, 980, 760, pal[0]); blob(200, 520, 560, pal[1]); blob(880, 1380, 560, pal[2]); blob(860, 300, 420, pal[1]); }
   else { blob(820, 520, 620, pal[0]); blob(180, 300, 520, pal[1]); blob(540, 820, 480, pal[2]); blob(980, 140, 360, pal[1]); }
-  const im = x.getImageData(0, 0, 1080, 1920), dd = im.data; for (let i = 0; i < dd.length; i += 4) { const n = (Math.random() - .5) * 22; dd[i] += n; dd[i + 1] += n; dd[i + 2] += n; } x.putImageData(im, 0, 0);
+  x.globalAlpha = 1; if (!photo && shape !== 'full') x.restore();
+  if (shape !== 'full') { x.save(); cardPath(); x.strokeStyle = shape === 'glass' || photo ? 'rgba(255,255,255,.75)' : 'rgba(255,255,255,.35)'; x.lineWidth = 3; x.stroke(); x.restore(); }
+  const im = x.getImageData(0, 0, 1080, 1920), dd = im.data; for (let i = 0; i < dd.length; i += 4) { if (!dd[i + 3]) continue; const n = (Math.random() - .5) * (photo ? 10 : 22); dd[i] += n; dd[i + 1] += n; dd[i + 2] += n; } x.putImageData(im, 0, 0);
   const F = (w, px) => { x.font = `${w} ${px}px Inter, Helvetica, Arial, sans-serif`; };
   const LS = v => { if ('letterSpacing' in x) x.letterSpacing = v + 'px'; };
   const T = (t, w, px, X, Y, al = 'left', col = INK, ls = 0) => { F(w, px); x.fillStyle = col; x.textAlign = al; LS(ls); x.fillText(t, X, Y); LS(0); };
@@ -1437,24 +1457,33 @@ async function buildCard(k, opt = {}) {
 }
 async function shareCard(k) {
   const s = sessionOf(k), songs = s.songs || [];
-  const opt = { style: S.settings.cardStyle || 'minimal', bg: S.settings.cardBg || 'auto', song: songs.length ? songs.length - 1 : null };
+  const opt = { style: S.settings.cardStyle || 'minimal', bg: S.settings.cardBg || 'auto', shape: S.settings.cardShape === 'photo' ? 'round' : (S.settings.cardShape || 'full'), photo: null, song: songs.length ? songs.length - 1 : null };
   const fname = `workout-${k}.png`;
   openSheet('صـورة الستـوري', '', async ctl => {
     const draw = async () => {
       ctl.body.innerHTML = `<div class="seg" style="margin-bottom:12px"><button class="${opt.style === 'minimal' ? 'on' : ''}" data-st="minimal">بسيط</button><button class="${opt.style === 'summary' ? 'on' : ''}" data-st="summary">ملخص</button></div>
-        <div style="font-size:13px;color:var(--mut);margin:0 4px 6px">الخلفية</div>
-        <div class="bgpick">${Object.entries(CARD_BG).map(([id, b]) => { const bb = id === 'auto' ? CARD_BG[AUTO_BG[s.w]] : b; return `<button class="${opt.bg === id ? 'on' : ''}" data-bg="${id}"><i style="background:radial-gradient(circle at 30% 30%, ${bb.c[1]}, transparent 60%), radial-gradient(circle at 75% 70%, ${bb.c[0]}, transparent 65%), ${bb.bg}"></i><span>${b.n}</span></button>`; }).join('')}</div>
+        <div style="font-size:13px;color:var(--mut);margin:0 4px 6px">الشكل</div>
+        <div class="chips" style="margin-bottom:12px">${[['full', 'كامل'], ['round', 'مقوّس'], ['glass', 'زجاجي شفاف'], ['photo', 'على صورتي']].map(([id, n]) => `<button class="chip ${opt.shape === id ? 'on' : ''}" data-sh="${id}">${n}</button>`).join('')}</div>
+        ${opt.shape === 'photo' ? `<label class="pill block" style="background:#fff;margin-bottom:12px">${I.cam} ${opt.photo ? 'غيّري الصورة' : 'اختاري صورة من جوالك'}<input type="file" accept="image/*" id="phIn" hidden></label>` : ''}
+        ${opt.shape === 'photo' ? '' : `<div style="font-size:13px;color:var(--mut);margin:0 4px 6px">${opt.shape === 'glass' ? 'لون الزجاج' : 'الخلفية'}</div>`}
+        <div class="bgpick" style="${opt.shape === 'photo' ? 'display:none' : ''}">${Object.entries(CARD_BG).map(([id, b]) => { const bb = id === 'auto' ? CARD_BG[AUTO_BG[s.w]] : b; return `<button class="${opt.bg === id ? 'on' : ''}" data-bg="${id}"><i style="background:radial-gradient(circle at 30% 30%, ${bb.c[1]}, transparent 60%), radial-gradient(circle at 75% 70%, ${bb.c[0]}, transparent 65%), ${bb.bg}"></i><span>${b.n}</span></button>`; }).join('')}</div>
         ${songs.length > 1 ? `<div style="font-size:13px;color:var(--mut);margin:0 4px 6px">أغنية اليوم</div><div class="chips" style="margin-bottom:12px">${songs.map((z, i) => `<button class="chip ${opt.song === i ? 'on' : ''}" data-sg="${i}">${esc(splitSong(z.t).title)}</button>`).join('')}</div>` : songs.length ? '' : '<p class="hint" style="margin:0 4px 10px">ما أضفتي أغاني لهالتمرين. أضيفيها من شاشة التمرين («أغاني التمرين») وتطلع هنا كأغنية اليوم.</p>'}
         <div class="empty" id="prv">جاري التجهيز…</div>`;
       $$('[data-st]', ctl.el).forEach(b => b.onclick = () => { opt.style = b.dataset.st; S.settings.cardStyle = opt.style; Store.touch('settings'); draw(); });
+      $$('[data-sh]', ctl.el).forEach(b => b.onclick = () => { opt.shape = b.dataset.sh; S.settings.cardShape = opt.shape; Store.touch('settings'); draw(); });
+      const phIn = $('#phIn', ctl.el); if (phIn) phIn.onchange = e => { const f = e.target.files[0]; if (!f) return; const u = URL.createObjectURL(f); const im = new Image(); im.onload = () => { opt.photo = im; draw(); }; im.src = u; };
       $$('[data-bg]', ctl.el).forEach(b => b.onclick = () => { opt.bg = b.dataset.bg; S.settings.cardBg = opt.bg; Store.touch('settings'); draw(); });
       $$('[data-sg]', ctl.el).forEach(b => b.onclick = () => { opt.song = Number(b.dataset.sg); draw(); });
+      if (opt.shape === 'photo' && !opt.photo) { $('#prv', ctl.el).textContent = 'اختاري صورة، وتطلع البطاقة الزجاجية فوقها.'; return; }
       const cv = await buildCard(k, opt); const url = cv.toDataURL('image/png'); const blob = await new Promise(r => cv.toBlob(r, 'image/png'));
       const file = new File([blob], fname, { type: 'image/png' });
       const canShare = !Store.dl && navigator.canShare && (() => { try { return navigator.canShare({ files: [file] }); } catch (e) { return false; } })();
-      $('#prv', ctl.el).outerHTML = `<img class="share-prev" src="${url}" alt="">
+      const transp = opt.shape === 'round' || opt.shape === 'glass';
+      $('#prv', ctl.el).outerHTML = `<div class="prev-wrap ${transp ? 'checker' : ''}"><img class="share-prev" src="${url}" alt=""></div>
+        ${transp ? `<button class="pill block" style="background:#fff;margin-top:10px" id="cpyImg">نسخ كملصق</button><p class="hint" style="margin:8px 4px 0">المنطقة المربعة خلف الحواف شفافة. انسخيها والصقيها في ستوري إنستقرام فوق أي صورة، وتطلع كملصق.</p>` : ''}
         <button class="pill dark block" style="margin-top:14px" id="saveImg">${I.share} ${Store.dl ? 'حفظ / مشاركة' : canShare ? 'مشاركة للستوري' : 'حفظ الصورة'}</button>
         <p class="hint" style="text-align:center;margin-top:10px">لو ما اشتغل الزر: اضغطي مطوّلًا على الصورة واختاري «حفظ في الصور».</p>`;
+      const cp = $('#cpyImg', ctl.el); if (cp) cp.onclick = async () => { try { await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]); toast('انسخت ✓ الصقيها في الستوري'); } catch (e) { toast('اضغطي مطوّلًا على الصورة واختاري «نسخ»'); } };
       $('#saveImg', ctl.el).onclick = async () => {
         try {
           if (Store.dl) { await Store.dl.save({ filename: fname, data: blob }); toast('تم ✓'); return; }
