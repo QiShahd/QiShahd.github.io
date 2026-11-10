@@ -422,6 +422,26 @@ input,textarea,select{font:inherit;color:inherit}
 .inbox input{width:100%;min-width:0;padding:0}
 .inbox{overflow:hidden}
 
+.st.alt{background:#E6F4FF;color:#1B5FA8}
+.items .itm{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.items .itm:first-child{border-top:0}
+.items .itm .tx{flex:1}
+.items .itm b{display:block;font-size:14.5px}
+.items .itm span{font-size:12px;color:var(--mut)}
+.additem{margin-top:10px}
+.additem #fq{width:100%;height:48px;border:0;border-radius:14px;background:#F2F3F5;padding:0 14px;font-size:15px;outline:0}
+.fsug{display:flex;flex-direction:column;margin-top:4px}
+.fsug button{display:flex;justify-content:space-between;align-items:center;padding:11px 6px;border-bottom:1px solid var(--line);text-align:right;font-size:14.5px}
+.fsug button span{font-size:12px;color:var(--mut)}
+.fpick-h{display:flex;justify-content:space-between;align-items:baseline;margin:10px 2px 8px}
+.fpick-h span{font-size:12px}
+.gchips{display:flex;gap:6px}
+.gchips button{flex:1;height:34px;border-radius:10px;background:#F2F3F5;font-size:13px;font-weight:600}
+#fpick .inbox{background:#F6F7F9}
+.cmp{margin-top:10px;border-radius:14px;padding:10px 12px;font-size:13.5px;line-height:1.6}
+.cmp.good{background:#E3F6EA;color:#0C6B34}
+.cmp.more{background:#FFF4E0;color:#8A5A00}
+
 </style>
 </head>
 <body>
@@ -1185,18 +1205,26 @@ function tiles(k) {
       <div class="foot"><span class="badge ${coreDone === 6 ? 'ok' : coreDone ? 'mid' : 'low'}">${coreDone === 6 ? 'تم ✓' : coreDone ? 'كمّلي' : 'ابدئي'}</span><span>${coreOn ? 'يومي' : ''}</span></div></button>
   </div>`;
 }
+const nAr = s => String(s || '').replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/[ًٌٍَُِّْـ]/g, '').trim();
+function refSearch(q) { q = nAr(q); if (!q) return []; const ws = q.split(/\s+/); return REF100.filter(r => { const n = nAr(r[0]); return ws.every(w => n.includes(w)); }).sort((a, b) => nAr(a[0]).indexOf(ws[0]) - nAr(b[0]).indexOf(ws[0]) || a[0].length - b[0].length).slice(0, 7); }
+const r1 = v => Math.round(v * 10) / 10;
+function otherTotals(m) {
+  if (m?.items?.length) return m.items.reduce((t, i) => ({ k: t.k + (i.k || 0), p: t.p + (i.p || 0), c: t.c + (i.c || 0), f: t.f + (i.f || 0) }), { k: 0, p: 0, c: 0, f: 0 });
+  return { k: num(m?.kcal) || 0, p: 0, c: 0, f: 0 };
+}
+const otherName = m => m?.items?.length ? m.items.map(i => i.n).join('، ') : (m?.text || 'وجبة بديلة');
 function mealsCard(k) {
   const idx = planIdx(k), P = PLAN[idx], meals = peek(k).meals || {};
   let kcal = 0, prot = 0;
-  for (const [s] of MEAL_SLOTS) { const m = meals[s]; if (!m) continue; if (m.st === 'ate') { kcal += P[s].kcal; prot += P[s].p; } else if (m.st === 'other') { kcal += num(m.kcal) || 0; } }
+  for (const [s] of MEAL_SLOTS) { const m = meals[s]; if (!m) continue; if (m.st === 'ate') { kcal += P[s].kcal; prot += P[s].p; } else if (m.st === 'other') { const t = otherTotals(m); kcal += t.k; prot += t.p; } }
   const rows = MEAL_SLOTS.map(([s, lbl]) => {
     const m = P[s], st = meals[s];
-    const badge = st?.st === 'ate' ? '<span class="st ate">أكلتها ✓</span>' : st?.st === 'other' ? '<span class="st other">شي ثاني</span>' : '<span class="st">—</span>';
-    return `<button class="it" style="width:100%;text-align:right" onclick="A.meal('${k}','${s}')"><div class="sk-box">${Sketch.food(m.sk)}</div><div class="tx"><span>${lbl}</span><b>${esc(st?.st === 'other' && st.text ? st.text : m.name)}</b><span class="num">${m.kcal} سعرة · ${m.p}غ بروتين</span></div><div class="end">${badge}</div></button>`;
+    const badge = st?.st === 'ate' ? '<span class="st ate">أكلتها ✓</span>' : st?.st === 'other' ? `<span class="st alt">بديل ✓</span>` : '<span class="st">—</span>';
+    return `<button class="it" style="width:100%;text-align:right" onclick="A.meal('${k}','${s}')"><div class="sk-box">${Sketch.food(m.sk)}</div><div class="tx"><span>${lbl}</span><b>${esc(st?.st === 'other' ? otherName(st) : m.name)}</b><span class="num">${st?.st === 'other' ? Math.round(otherTotals(st).k) + ' سعرة · ' + Math.round(otherTotals(st).p) + 'غ بروتين' : m.kcal + ' سعرة · ' + m.p + 'غ بروتين'}</span></div><div class="end">${badge}</div></button>`;
   }).join('');
   return `<div class="sec"><h2>أكـل اليـوم</h2><button class="link" onclick="A.pickPlanDay('${k}')">${k < S.settings.mealStart && S.settings.mealOv[k] == null ? 'يبدأ ' + fmtLong(S.settings.mealStart) + ' · معاينة' : 'يوم ' + (idx + 1) + ' · يتكرر أسبوعيًا'} ▾</button></div>
     <div class="card list" style="padding:6px 16px">${rows}</div>
-    <div class="card" style="padding:14px 16px"><div class="kcalbar"><span>المسجّل <b>${fmtN(kcal)}</b> / ${TARGETS.kcal} سعرة</span><span>بروتين <b>${prot}</b> / ${TARGETS.p}غ</span></div><div class="bar"><i style="width:${Math.min(100, kcal / TARGETS.kcal * 100)}%"></i></div>
+    <div class="card" style="padding:14px 16px"><div class="kcalbar"><span>المسجّل <b>${fmtN(kcal)}</b> / ${TARGETS.kcal} سعرة</span><span>بروتين <b>${Math.round(prot)}</b> / ${TARGETS.p}غ</span></div><div class="bar"><i style="width:${Math.min(100, kcal / TARGETS.kcal * 100)}%"></i></div>
     <div class="hint" style="margin-top:8px">مجموع جدول اليوم ${P.total} سعرة، ولك ${TARGETS.kcal - P.total} سعرة مفتوحة (قهوة بحليب، فاكهة، قطعة شوكولاتة).</div></div>`;
 }
 function bodyCard(k) {
@@ -1819,17 +1847,42 @@ const A = {
       c.body.innerHTML = recipeHtml(m, lbl) + `
         <div class="sec"><h2 style="font-size:17px">أكلتيها؟</h2></div>
         <div class="row2" style="margin-bottom:10px"><button class="pill ${st.st === 'ate' ? 'dark' : 'ghost'}" style="${st.st === 'ate' ? '' : 'background:#fff'}" id="mAte">${st.st === 'ate' ? '✓ ' : ''}أكلتها</button><button class="pill ${st.st === 'other' ? 'dark' : 'ghost'}" style="${st.st === 'other' ? '' : 'background:#fff'}" id="mOther">أكلت شي ثاني</button></div>
-        ${st.st === 'other' ? `<div class="field"><label>وش أكلتي؟</label><textarea id="oTx" rows="2" placeholder="مثلًا: برقر دجاج مشوي وسلطة">${esc(st.text || '')}</textarea></div>
-          <div class="field"><label>سعرات تقريبية (اختياري)</label><input id="oK" class="num" inputmode="numeric" value="${esc(st.kcal || '')}" placeholder="—"></div>
+        ${st.st === 'other' ? (() => { const t = otherTotals(st), dk = Math.round(t.k - m.kcal), dp = Math.round(t.p - m.p); return `
+          <div class="card" style="padding:14px 16px"><h3>وش أكلتي؟</h3><p class="hint" style="margin:2px 0 10px">أضيفي كل صنف لحاله بوزنه، وأحسب لك سعراته من جدول القيم الغذائية لكل 100غ.</p>
+            <div class="items">${(st.items || []).map((it, ii) => `<div class="itm"><div class="tx"><b>${esc(it.n)}</b><span class="num">${it.g ? it.g + 'غ · ' : ''}${Math.round(it.k)} سعرة · ب ${r1(it.p)} · ك ${r1(it.c)} · د ${r1(it.f)}</span></div><button class="mut" data-di="${ii}" aria-label="حذف">${I.x.replace('<svg', '<svg width="14" height="14"')}</button></div>`).join('') || '<div class="empty" style="padding:10px 0">ما أضفتي أصناف للحين</div>'}</div>
+            <div class="additem"><input id="fq" placeholder="ابحثي: صدر دجاج، رز، تفاح…" autocomplete="off"><div id="fsug" class="fsug"></div>
+              <div id="fpick" style="display:none"><div class="fpick-h"><b id="fname"></b><span id="fper" class="num mut"></span></div>
+                <div class="gchips">${[30, 50, 100, 150, 200].map(g => `<button data-g="${g}">${g}غ</button>`).join('')}</div>
+                <div style="display:flex;gap:8px;margin-top:8px"><label class="inbox" style="flex:1"><input id="fg" inputmode="decimal" placeholder="0"><span>غرام</span></label><button class="pill dark" id="fadd" style="height:52px">أضيفي</button></div>
+                <div id="fcalc" class="num hint" style="margin-top:6px"></div></div>
+              <button class="addnote" id="fman" style="margin-top:8px">صنف مو موجود بالجدول؟ أضيفيه بنفسك</button>
+              <div id="fmanbox" style="display:none;margin-top:8px"><div class="field" style="background:#F4F5F7"><label>اسم الصنف</label><input id="mn"></div><div class="row2"><div class="field" style="background:#F4F5F7"><label>سعرات</label><input id="mk" class="num" inputmode="decimal"></div><div class="field" style="background:#F4F5F7"><label>بروتين (غ) اختياري</label><input id="mp" class="num" inputmode="decimal"></div></div><button class="pill dark block" id="madd">أضيفي</button></div></div>
+          </div>
+          ${(st.items || []).length || st.kcal ? `<div class="card" style="padding:14px 16px"><div class="macros" style="margin:0"><div><b>${Math.round(t.k)}</b><span>سعرة</span></div><div><b>${Math.round(t.p)}g</b><span>بروتين</span></div><div><b>${Math.round(t.c)}g</b><span>كارب</span></div><div><b>${Math.round(t.f)}g</b><span>دهون</span></div></div>
+            <div class="cmp ${dk <= 0 ? 'good' : 'more'}">${dk < 0 ? `🌿 أقل من وجبة الجدول بـ ${-dk} سعرة. يساعدك تقللين سعرات اليوم.` : dk === 0 ? 'نفس سعرات وجبة الجدول بالضبط 👌' : `أكثر من وجبة الجدول بـ ${dk} سعرة. عادي، وازنيها بباقي اليوم أو من الـ150 المفتوحة.`}</div>
+            ${dp < -5 ? `<div class="cmp more" style="margin-top:6px">البروتين أقل بـ ${-dp}غ من الجدول. زيدي مصدر بروتين لو تقدرين.</div>` : ''}</div>` : ''}
+          ${st.text && !(st.items || []).length ? `<div class="note" style="margin-bottom:10px">${esc(st.text)}${st.kcal ? ' · ' + esc(st.kcal) + ' سعرة' : ''}</div>` : ''}
+          <div class="field"><label>ملاحظة (اختياري)</label><input id="oTx" value="${esc(st.note || '')}" placeholder="مثلًا: عزيمة، أكل برا…"></div>
           <label class="pill block" style="background:#fff;margin-bottom:8px">${I.cam} ${st.ph ? 'غيّري الصورة' : 'أرفقي صورة'}<input type="file" accept="image/*" id="oPh" hidden></label>
           ${st.ph ? `<img class="ph" data-ph='${JSON.stringify(st.ph)}' alt="">` : ''}
-          <button class="pill dark block" id="oSave" style="margin-top:10px">حفظ</button>` : ''}
+          <button class="pill dark block" id="oSave" style="margin-top:10px">حفظ</button>`; })() : ''}
         ${st.st ? '<button class="pill block" style="margin-top:8px" id="mClr">مسح التسجيل</button>' : ''}`;
       $('#mAte').onclick = () => { D.meals[slot] = st.st === 'ate' ? undefined : { st: 'ate', at: Date.now() }; if (!D.meals[slot]) delete D.meals[slot]; Store.touch(k); render(); c.close(); };
       $('#mOther').onclick = () => { D.meals[slot] = Object.assign({}, st, { st: 'other' }); Store.touch(k); draw(c); render(); };
       $('#mClr') && ($('#mClr').onclick = () => { delete D.meals[slot]; Store.touch(k); render(); c.close(); });
       if (st.st === 'other') {
-        const keep = () => { st.text = $('#oTx').value; st.kcal = $('#oK').value; D.meals[slot] = st; };
+        const keep = () => { st.note = $('#oTx').value; D.meals[slot] = st; };
+        const addItem = it => { keep(); (st.items ||= []).push(it); D.meals[slot] = st; Store.touch(k); draw(c); render(); setTimeout(() => $('#fq')?.focus(), 50); };
+        let sel = null;
+        const calc = () => { const g = num($('#fg').value) || 0; $('#fcalc').textContent = sel && g ? `= ${Math.round(sel[1] * g / 100)} سعرة · ب ${r1(sel[2] * g / 100)} · ك ${r1(sel[3] * g / 100)} · د ${r1(sel[4] * g / 100)}` : ''; };
+        const choose = r => { sel = r; $('#fsug').innerHTML = ''; $('#fq').value = r[0]; $('#fpick').style.display = ''; $('#fname').textContent = r[0]; $('#fper').textContent = `لكل 100غ: ${r[1]} سعرة · ب ${r[2]}`; $('#fg').focus(); calc(); };
+        $('#fq').oninput = () => { sel = null; $('#fpick').style.display = 'none'; const res = refSearch($('#fq').value); $('#fsug').innerHTML = res.map((r, i) => `<button data-r="${i}"><b>${r[0]}</b><span class="num">${r[1]} سعرة/100غ</span></button>`).join('') || ($('#fq').value.trim() ? '<div class="hint" style="padding:8px 4px">ما لقيته بالجدول. أضيفيه بنفسك من الرابط تحت.</div>' : ''); $$('#fsug [data-r]').forEach(b => b.onclick = () => choose(res[Number(b.dataset.r)])); };
+        $$('[data-g]', c.el).forEach(b => b.onclick = () => { $('#fg').value = b.dataset.g; calc(); });
+        $('#fg').oninput = calc;
+        $('#fadd').onclick = () => { const g = num($('#fg').value); if (!sel || !g) { toast('اختاري الصنف واكتبي الوزن'); return; } addItem({ n: sel[0], g, k: sel[1] * g / 100, p: sel[2] * g / 100, c: sel[3] * g / 100, f: sel[4] * g / 100 }); };
+        $('#fman').onclick = () => { $('#fmanbox').style.display = ''; $('#mn').value = $('#fq').value; $('#mk').focus(); };
+        $('#madd').onclick = () => { const n = $('#mn').value.trim(), kk = num($('#mk').value); if (!n || kk == null) { toast('اكتبي الاسم والسعرات'); return; } addItem({ n, k: kk, p: num($('#mp').value) || 0, c: 0, f: 0, manual: 1 }); };
+        $$('[data-di]', c.el).forEach(b => b.onclick = () => { keep(); st.items.splice(Number(b.dataset.di), 1); Store.touch(k); draw(c); render(); });
         $('#oPh').onchange = async e => { const f = e.target.files[0]; if (!f) return; keep(); toast('جاري حفظ الصورة…'); const ph = await savePhoto(f); if (ph) { st.ph = ph; D.meals[slot] = st; Store.touch(k); draw(c); render(); } };
         $('#oSave').onclick = () => { keep(); Store.touch(k); render(); c.close(); toast('انحفظ ✓'); };
       }
@@ -1853,7 +1906,7 @@ const A = {
   daySheet(k) {
     const draw = c => {
       const D = peek(k), w = workoutFor(k), s = D.session, st = s?.end ? sessionStats(k) : null, meals = D.meals || {};
-      const mealsTxt = MEAL_SLOTS.map(([sl, l]) => meals[sl] ? `${l}: ${meals[sl].st === 'ate' ? PLAN[planIdx(k)][sl].name : '«' + esc(meals[sl].text || 'شي ثاني') + '»'}` : '').filter(Boolean);
+      const mealsTxt = MEAL_SLOTS.map(([sl, l]) => meals[sl] ? `${l}: ${meals[sl].st === 'ate' ? PLAN[planIdx(k)][sl].name : '«' + esc(otherName(meals[sl])) + '» · ' + Math.round(otherTotals(meals[sl]).k) + ' سعرة'}` : '').filter(Boolean);
       const photos = MEAL_SLOTS.map(([sl]) => meals[sl]?.ph).filter(Boolean);
       c.body.innerHTML = `<div class="chips" style="margin-bottom:12px"><button class="chip ${!w ? 'on' : ''}" data-w="rest">راحة</button>${Object.values(WORKOUTS).map(W => `<button class="chip ${w === W.id ? 'on' : ''}" data-w="${W.id}">${W.title}</button>`).join('')}</div>
         <div class="card"><table class="tbl">
