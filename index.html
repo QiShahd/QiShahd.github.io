@@ -1745,7 +1745,9 @@ async function shareCard(k) {
       $$('[data-bg]', ctl.el).forEach(b => b.onclick = () => { opt.bg = b.dataset.bg; S.settings.cardBg = opt.bg; Store.touch('settings'); draw(); });
       $$('[data-sg]', ctl.el).forEach(b => b.onclick = () => { opt.song = Number(b.dataset.sg); draw(); });
       if (opt.shape === 'photo' && !opt.photo) { $('#prv', ctl.el).textContent = 'اختاري صورة، وتطلع البطاقة الزجاجية فوقها.'; return; }
+      const tok = (opt._t = (opt._t || 0) + 1);
       const cv = await buildCard(k, opt); const url = cv.toDataURL('image/png'); const blob = await new Promise(r => cv.toBlob(r, 'image/png'));
+      if (tok !== opt._t || !$('#prv', ctl.el)) return;
       const file = new File([blob], fname, { type: 'image/png' });
       const canShare = !Store.dl && navigator.canShare && (() => { try { return navigator.canShare({ files: [file] }); } catch (e) { return false; } })();
       const transp = opt.shape === 'round' || opt.shape === 'glass';
