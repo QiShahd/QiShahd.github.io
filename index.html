@@ -442,6 +442,102 @@ input,textarea,select{font:inherit;color:inherit}
 .cmp.good{background:#E3F6EA;color:#0C6B34}
 .cmp.more{background:#FFF4E0;color:#8A5A00}
 
+/* ---- v4 compact exercise card ---- */
+.excard{padding:12px 14px;scroll-margin-top:190px}
+#cardioCard{scroll-margin-top:190px}
+.ex-h2{display:flex;gap:10px;align-items:center}
+.sk-box.sm{width:64px;height:54px;border-radius:14px;background:#F4F5F7;flex:none;display:grid;place-items:center}
+.sk-box.sm svg{width:62px;height:52px}
+.ex-t{flex:1;min-width:0}
+.ex-meta{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--mut);margin-bottom:1px;flex-wrap:nowrap;white-space:nowrap}
+.ex-meta span+span::before{content:"·";margin-inline-end:6px}
+.ex-meta .okb{color:#0C7A3A;font-weight:700}
+.ex-meta .okb::before{content:""!important;margin:0!important}
+.editbtn{margin-inline-start:auto;font-size:13px;color:var(--mut);width:28px;height:28px;border-radius:50%;background:#F2F3F5;padding:0;display:grid;place-items:center}
+.excard .exn{font-size:16px}
+.ex-t .en.ar{font-size:12.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ex-tools{display:flex;align-items:center;gap:6px;margin-top:10px}
+.ex-tools .vid{height:30px;font-size:12px;padding:0 10px}
+.altseg.sm{margin:0;flex:1;height:32px;padding:2px;border-radius:11px}
+.altseg.sm button{height:28px;border-radius:9px;font-size:12px}
+.tipd{margin-top:8px;background:#F7F7F9;border-radius:12px;padding:8px 10px}
+.tipd summary{list-style:none;font-size:12.5px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.tipd summary::-webkit-details-marker{display:none}
+.tipd[open] summary{white-space:normal}
+.tipd p{margin:6px 0 0;font-size:13px;line-height:1.65;color:var(--ink2)}
+.excard .up{margin-top:6px;padding:6px 10px;font-size:12px}
+.lastline{font-size:12px;color:var(--mut);margin:8px 2px 0}
+.lastline b{font-family:var(--num);color:var(--ink2);font-weight:600;unicode-bidi:isolate}
+.srows{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.srow{display:grid;grid-template-columns:22px 1fr 1fr 46px;gap:6px;align-items:center;background:#F6F7F9;border-radius:14px;padding:5px 6px 5px 5px;width:100%}
+.srow>*{min-width:0}
+.srow .sn{font-family:var(--num);font-weight:700;font-size:13px;color:var(--mut);text-align:center}
+.srow .inbox{height:44px;border-radius:11px;padding:0 10px}
+.srow .inbox input{font-size:19px}
+.srow .inbox span{font-size:11px}
+.ck{width:44px;height:44px;border-radius:12px;background:#fff;border:2px solid #C9CCD2;color:#C9CCD2;display:grid;place-items:center}
+.ck svg{width:20px;height:20px}
+.ck:active{transform:scale(.94)}
+.ck.on{background:#0E0E10;border-color:#0E0E10;color:#fff;width:32px;height:32px;border-radius:50%}
+.ck.on svg{width:15px;height:15px}
+.srow.done{grid-template-columns:22px 1fr 1fr auto 34px;text-align:right;padding:7px 8px 7px 6px}
+.srow.done .sv{font-family:var(--num);font-size:16px;font-weight:600;white-space:nowrap}
+.srow.done .sv small{font-family:var(--ar);font-size:11px;color:var(--mut);font-weight:400}
+.srow.ed{grid-template-columns:22px 1fr 1fr 46px}
+.ed-ex{grid-column:1/-1}
+.ed-ex .diff{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+.ed-ex .diff button{height:32px;border-radius:10px;background:#fff;font-size:12px;font-weight:600;color:var(--mut)}
+.ed-ex .setnote{margin-top:6px}
+.excard .setctl{margin-top:8px}
+.excard .setctl button{height:32px;font-size:12px}
+.rq{font-size:13px;font-weight:700;margin:2px 0 6px}
+.rdiff{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:10px}
+.rdiff button{height:38px;border-radius:12px;background:#F2F3F5;font-size:13px;font-weight:700;color:var(--mut)}
+.rdiff button.on[data-v="1"],.ed-ex .diff button.on[data-v="1"]{background:#DDF5E6;color:#0C7A3A}
+.rdiff button.on[data-v="2"],.ed-ex .diff button.on[data-v="2"]{background:#FFF0CF;color:#8A5A00}
+.rdiff button.on[data-v="3"],.ed-ex .diff button.on[data-v="3"]{background:#FFE0D6;color:#B4381B}
+.rdiff button.on[data-v="4"],.ed-ex .diff button.on[data-v="4"]{background:#2A2B30;color:#fff}
+.rnote{margin-top:8px;background:#F2F3F5}
+.ring{width:150px;height:150px;margin:2px auto 8px}
+.ring .c b{font-size:50px}
+.rest .box{padding:16px 18px 18px}
+
+.cyc{display:flex;align-items:center;gap:12px;width:100%;text-align:right;margin-top:14px;background:#FFF2F6;border-radius:16px;padding:10px 12px}
+.cyc.big{background:#fff;margin-top:0}
+.cyc-ic{width:40px;height:40px;border-radius:12px;background:#FFE0EA;display:grid;place-items:center;font-size:20px;flex:none}
+.cyc .tx{flex:1;min-width:0}
+.cyc .tx b{display:block;font-size:14.5px}
+.cyc .tx span{font-size:12px;color:var(--mut)}
+.pcal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.pcal .dn{font-size:11px;color:var(--mut);padding:2px 0 6px}
+.pc{aspect-ratio:1;border-radius:50%;font-family:var(--num);font-size:14px;position:relative;display:grid;place-items:center}
+.pc.on{background:#FF5A8A;color:#fff;font-weight:600}
+.pc.pred{background:#FFF0F4;box-shadow:inset 0 0 0 1.5px #FF5A8A;color:#C2185B}
+.pc.today{font-weight:800;text-decoration:underline}
+.pc.sel{outline:2px solid #0E0E10;outline-offset:1px}
+.pc i{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:#8E6CFF}
+
+.gchips button{display:flex;flex-direction:column;align-items:center;justify-content:center;height:44px;line-height:1.1}
+.gchips button b{font-size:12.5px}
+.gchips button small{font-size:10.5px;color:var(--mut);font-family:var(--num)}
+.gchips.est{flex-wrap:wrap}
+.gchips.est button{height:36px;flex:1 1 30%;font-size:12.5px}
+.extra-row{display:flex;align-items:center;gap:12px;width:100%;text-align:right;padding:12px 14px}
+.extra-row .tx{flex:1;min-width:0}
+.extra-row .tx b{display:block;font-size:14.5px}
+.extra-row .tx span{font-size:12px;color:var(--mut);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.extra-row .pls{width:32px;height:32px;border-radius:50%;background:#F2F3F5;display:grid;place-items:center;font-size:20px}
+.kcard{padding:16px}
+.kc-top{display:flex;justify-content:space-between;align-items:center}
+.kbig{font-weight:200;font-size:46px;letter-spacing:-.04em;line-height:1.05}
+.kbig small{font-size:15px;font-weight:400;font-family:var(--ar);letter-spacing:0}
+.kring{width:62px;height:62px;border-radius:50%;background:conic-gradient(var(--kc,#0E0E10) calc(var(--p)*1%),#ECEDF0 0);display:grid;place-items:center;position:relative}
+.kring::before{content:"";position:absolute;inset:6px;border-radius:50%;background:#fff}
+.kring span{position:relative;font-size:13px;font-weight:600}
+.kcard.ok{--kc:#1FB55A}.kcard.near{--kc:#F2A20C}.kcard.over{--kc:#F2443A}
+.kcard .bar i{background:var(--kc)}
+.kmsg{font-size:13px;line-height:1.6;margin-top:10px;color:var(--ink2)}
+
 </style>
 </head>
 <body>
@@ -451,43 +547,43 @@ input,textarea,select{font:inherit;color:inherit}
 const WORKOUTS = {
   d1: { id:'d1', short:'سفلي أ', title:'سفلي أ', kt:'سفلـي أ', sub:'مؤخرة وفخذ خلفي', en:'LOWER A', zone:'lower', grad:'g-work',
     ex:[
-      {id:'hipthrust', v:'https://youtu.be/29OfN4ztW_g', aen:'Glute Bridge', av:'https://youtu.be/Xp33YgPZgns', ar:'دفع الورك بالدمبل (هيب ثرست)', en:'Dumbbell Hip Thrust', sets:4, reps:'10-12', rest:'90-120', tip:'أسندي أعلى ظهرك على حافة البنش، وحطي الدمبل على عظمة الحوض وثبتيه بيديك. ادفعي من كعبك لين يصير جسمك خط مستقيم من الكتف للركبة، واعصري مؤخرتك فوق ثانية، ولا تقوّسين ظهرك. ذقنك لصدرك ونظرك لقدام.', alt:'جسر المؤخرة', sk:'hipthrust_db', main:true},
-      {id:'rdl', v:'https://youtu.be/5WxMW-Fu5KU', aen:'Good Morning', av:'https://youtu.be/nWyx81AfTos', ar:'رفعة رومانية بالدمبل', en:'Dumbbell Romanian Deadlift', sets:4, reps:'8-10', rest:'90-120', tip:'ادفعي وركك للخلف وحافظي على ظهرك مستقيم تمامًا.', alt:'تمرين صباح الخير', sk:'rdl', main:true},
-      {id:'legcurl', v:'https://youtu.be/WGih6WFr3uI', aen:'Single-Leg Hamstring Bridge', av:'https://youtu.be/cWiHUKPNYHk', ar:'جهاز ثني الأرجل (خلفي)', en:'Lying Leg Curl Machine', sets:4, reps:'12-15', rest:'60-90', tip:'تحركي ببطء واعصري الفخذ الخلفي في النهاية.', alt:'جسر الفخذ الخلفي بساق واحدة', sk:'legcurl'},
-      {id:'abduction', v:'https://youtu.be/H98IP8rARy4', aen:'Glute Kickback', av:'https://youtu.be/BNDw4ciQoQI', ar:'جهاز تبعيد الأرجل', en:'Hip Abduction Machine', sets:4, reps:'15-20', rest:'60-90', tip:'افتحي ساقيك ضد المقاومة واعصري الجانب.', alt:'رفس خلفي للمؤخرة', sk:'abduction'},
-      {id:'calfseat', v:'https://youtu.be/2Q-HQ3mnePg', aen:'Standing Calf Raise', av:'https://youtu.be/3ZRe_QpvRPg', ar:'رفع السمانة جالسة', en:'Seated Calf Raise', sets:4, reps:'15-20', rest:'60-90', tip:'تحركي ببطء واعصري السمانة في أعلى الحركة.', alt:'رفع السمانة واقفة', sk:'calfseat'},
-      {id:'tva', v:'https://youtu.be/SAgwDAPK8L8', ar:'تفعيل العضلة المستعرضة (شد البطن العميق)', en:'TVA Activation (Stomach Vacuum)', sets:4, reps:'10', rest:'60-90', tip:'اسحبي بطنك للداخل نحو العمود الفقري وأنتِ تتنفسين طبيعي، واثبتي 10-15 ثانية.', alt:null, sk:'tva', bw:true},
-      {id:'ptilt', v:'https://youtu.be/44s2-4rEjoo', ar:'إمالة الحوض الخلفية', en:'Posterior Pelvic Tilt', sets:4, reps:'12', rest:'60-90', tip:'استلقي واضغطي أسفل ظهرك للأرض بشد بطنك.', alt:null, sk:'ptilt', bw:true},
+      {id:'hipthrust', v:'https://youtu.be/29OfN4ztW_g', aen:'Glute Bridge', av:'https://youtu.be/Xp33YgPZgns', ar:'دفع الورك بالدمبل (هيب ثرست)', en:'Dumbbell Hip Thrust', sets:3, reps:'10-12', rest:'90-120', tip:'أسندي أعلى ظهرك على حافة البنش، وحطي الدمبل على عظمة الحوض وثبتيه بيديك. ادفعي من كعبك لين يصير جسمك خط مستقيم من الكتف للركبة، واعصري مؤخرتك فوق ثانية، ولا تقوّسين ظهرك. ذقنك لصدرك ونظرك لقدام.', alt:'جسر المؤخرة', sk:'hipthrust_db', main:true},
+      {id:'rdl', v:'https://youtu.be/5WxMW-Fu5KU', aen:'Good Morning', av:'https://youtu.be/nWyx81AfTos', ar:'رفعة رومانية بالدمبل', en:'Dumbbell Romanian Deadlift', sets:3, reps:'8-10', rest:'90-120', tip:'ادفعي وركك للخلف وحافظي على ظهرك مستقيم تمامًا.', alt:'تمرين صباح الخير', sk:'rdl', main:true},
+      {id:'legcurl', v:'https://youtu.be/WGih6WFr3uI', aen:'Single-Leg Hamstring Bridge', av:'https://youtu.be/cWiHUKPNYHk', ar:'جهاز ثني الأرجل (خلفي)', en:'Lying Leg Curl Machine', sets:3, reps:'12-15', rest:'60-90', tip:'تحركي ببطء واعصري الفخذ الخلفي في النهاية.', alt:'جسر الفخذ الخلفي بساق واحدة', sk:'legcurl'},
+      {id:'abduction', v:'https://youtu.be/H98IP8rARy4', aen:'Glute Kickback', av:'https://youtu.be/BNDw4ciQoQI', ar:'جهاز تبعيد الأرجل', en:'Hip Abduction Machine', sets:3, reps:'15-20', rest:'60-90', tip:'افتحي ساقيك ضد المقاومة واعصري الجانب.', alt:'رفس خلفي للمؤخرة', sk:'abduction'},
+      {id:'calfseat', v:'https://youtu.be/2Q-HQ3mnePg', aen:'Standing Calf Raise', av:'https://youtu.be/3ZRe_QpvRPg', ar:'رفع السمانة جالسة', en:'Seated Calf Raise', sets:3, reps:'15-20', rest:'60-90', tip:'تحركي ببطء واعصري السمانة في أعلى الحركة.', alt:'رفع السمانة واقفة', sk:'calfseat'},
+      {id:'tva', v:'https://youtu.be/SAgwDAPK8L8', ar:'تفعيل العضلة المستعرضة (شد البطن العميق)', en:'TVA Activation (Stomach Vacuum)', sets:3, reps:'10', rest:'60-90', tip:'اسحبي بطنك للداخل نحو العمود الفقري وأنتِ تتنفسين طبيعي، واثبتي 10-15 ثانية.', alt:null, sk:'tva', bw:true},
+      {id:'ptilt', v:'https://youtu.be/44s2-4rEjoo', ar:'إمالة الحوض الخلفية', en:'Posterior Pelvic Tilt', sets:3, reps:'12', rest:'60-90', tip:'استلقي واضغطي أسفل ظهرك للأرض بشد بطنك.', alt:null, sk:'ptilt', bw:true},
     ]},
   d2: { id:'d2', short:'علوي أ', title:'علوي أ', kt:'علـوي أ', sub:'ظهر وصدر', en:'UPPER A', zone:'upper', grad:'g-work2',
     ex:[
-      {id:'latpd', v:'https://youtu.be/7JnP8dFbS14', aen:'Dumbbell Row', av:'https://youtu.be/DMo3HJoawrU', ar:'سحب أمامي (لات بول داون)', en:'Lat Pulldown', sets:4, reps:'8-10', rest:'90-120', tip:'اسحبي البار لأعلى صدرك واخفضي كتفيك بعيد عن أذنيك.', alt:'تجديف بالدمبل', sk:'latpd', main:true},
-      {id:'mrow', v:'https://youtu.be/KrNumOj3Otc', aen:'Close-Grip Lat Pulldown', av:'https://youtube.com/shorts/OXteyscbYkA', ar:'جهاز التجديف (سند الصدر)', en:'Chest Supported Machine Row', sets:4, reps:'10-12', rest:'90-120', tip:'اسحبي المقبض نحو بطنك واعصري لوحي الكتف.', alt:'سحب أمامي قبضة ضيقة', sk:'mrow', main:true},
-      {id:'cpress', v:'https://youtu.be/sqNwDkUU_Ps', aen:'Barbell Bench Press', av:'https://youtu.be/SCVCLChPQFY', ar:'جهاز ضغط الصدر', en:'Machine Chest Press', sets:4, reps:'10-12', rest:'90-120', tip:'اضبطي ارتفاع المقعد بحيث يكون المقبض بمستوى منتصف صدرك.', alt:'بنش بريس بالبار', sk:'cpress', main:true},
-      {id:'facepull', v:'https://youtu.be/0Po47vvj9g4', aen:'Superman', av:'https://youtu.be/LZoWdePF1NQ', ar:'سحب للوجه بالكيبل', en:'Cable Face Pull', sets:4, reps:'15', rest:'60-90', tip:'اسحبي الحبل نحو وجهك مع فتح المرفقين لتنشيط أعلى الظهر.', alt:'سوبرمان (تقوية أسفل الظهر)', sk:'facepull'},
-      {id:'ccurl', v:'https://youtu.be/njLoCel5lUI', aen:'Barbell Biceps Curl', av:'https://youtu.be/N5x5M1x1Gd0', ar:'مرجحة بايسبس بالكيبل', en:'Cable Biceps Curl', sets:4, reps:'12', rest:'60-90', tip:'حافظي على شد ثابت طوال الحركة بدون تأرجح.', alt:'مرجحة بايسبس بالبار', sk:'ccurl'},
-      {id:'pushdown', v:'https://youtu.be/-xa-6cQaZKY', aen:'Cable Triceps Pushdown', av:'https://youtu.be/LXkCrxn3caQ', ar:'دفع الترايسبس بالحبل', en:'Rope Triceps Pushdown', sets:4, reps:'12', rest:'60-90', tip:'افتحي الحبل في الأسفل واعصري الترايسبس بالكامل.', alt:'دفع الترايسبس بالكيبل', sk:'pushdown'},
-      {id:'deadbug', v:'https://youtu.be/GbSC02oU3To', aen:'Crunch', av:'https://youtu.be/XY8KzdDcMFg', ar:'تمرين الخنفساء', en:'Dead Bug', sets:4, reps:'12', rest:'60-90', tip:'مدي ذراع وساق معاكسة مع إلصاق أسفل ظهرك بالأرض.', alt:'كرنش (تقريب علوي)', sk:'deadbug', bw:true},
+      {id:'latpd', v:'https://youtu.be/7JnP8dFbS14', aen:'Dumbbell Row', av:'https://youtu.be/DMo3HJoawrU', ar:'سحب أمامي (لات بول داون)', en:'Lat Pulldown', sets:3, reps:'8-10', rest:'90-120', tip:'اسحبي البار لأعلى صدرك واخفضي كتفيك بعيد عن أذنيك.', alt:'تجديف بالدمبل', sk:'latpd', main:true},
+      {id:'mrow', v:'https://youtu.be/KrNumOj3Otc', aen:'Close-Grip Lat Pulldown', av:'https://youtube.com/shorts/OXteyscbYkA', ar:'جهاز التجديف (سند الصدر)', en:'Chest Supported Machine Row', sets:3, reps:'10-12', rest:'90-120', tip:'اسحبي المقبض نحو بطنك واعصري لوحي الكتف.', alt:'سحب أمامي قبضة ضيقة', sk:'mrow', main:true},
+      {id:'cpress', v:'https://youtu.be/sqNwDkUU_Ps', aen:'Barbell Bench Press', av:'https://youtu.be/SCVCLChPQFY', ar:'جهاز ضغط الصدر', en:'Machine Chest Press', sets:3, reps:'10-12', rest:'90-120', tip:'اضبطي ارتفاع المقعد بحيث يكون المقبض بمستوى منتصف صدرك.', alt:'بنش بريس بالبار', sk:'cpress', main:true},
+      {id:'facepull', v:'https://youtu.be/0Po47vvj9g4', aen:'Superman', av:'https://youtu.be/LZoWdePF1NQ', ar:'سحب للوجه بالكيبل', en:'Cable Face Pull', sets:3, reps:'15', rest:'60-90', tip:'اسحبي الحبل نحو وجهك مع فتح المرفقين لتنشيط أعلى الظهر.', alt:'سوبرمان (تقوية أسفل الظهر)', sk:'facepull'},
+      {id:'ccurl', v:'https://youtu.be/njLoCel5lUI', aen:'Barbell Biceps Curl', av:'https://youtu.be/N5x5M1x1Gd0', ar:'مرجحة بايسبس بالكيبل', en:'Cable Biceps Curl', sets:3, reps:'12', rest:'60-90', tip:'حافظي على شد ثابت طوال الحركة بدون تأرجح.', alt:'مرجحة بايسبس بالبار', sk:'ccurl'},
+      {id:'pushdown', v:'https://youtu.be/-xa-6cQaZKY', aen:'Cable Triceps Pushdown', av:'https://youtu.be/LXkCrxn3caQ', ar:'دفع الترايسبس بالحبل', en:'Rope Triceps Pushdown', sets:3, reps:'12', rest:'60-90', tip:'افتحي الحبل في الأسفل واعصري الترايسبس بالكامل.', alt:'دفع الترايسبس بالكيبل', sk:'pushdown'},
+      {id:'deadbug', v:'https://youtu.be/GbSC02oU3To', aen:'Crunch', av:'https://youtu.be/XY8KzdDcMFg', ar:'تمرين الخنفساء', en:'Dead Bug', sets:3, reps:'12', rest:'60-90', tip:'مدي ذراع وساق معاكسة مع إلصاق أسفل ظهرك بالأرض.', alt:'كرنش (تقريب علوي)', sk:'deadbug', bw:true},
     ]},
   d3: { id:'d3', short:'سفلي ب', title:'سفلي ب', kt:'سفلـي ب', sub:'فخذ أمامي ومؤخرة', en:'LOWER B', zone:'lower', grad:'g-work3',
     ex:[
-      {id:'legpress', v:'https://youtu.be/q4W4_VJbKW0', aen:'Lunges', av:'https://youtu.be/9gglI77Kzq8', ar:'جهاز دفع الأرجل', en:'Leg Press', sets:4, reps:'12-15', rest:'90-120', tip:'لا تقفلين ركبتيك في الأعلى وخلّي ظهرك ملاصق للمقعد.', alt:'طعنات (لانجز)', sk:'legpress', main:true},
-      {id:'goblet', v:'https://youtu.be/zBV3ceGyAxw', aen:'Wall Sit', av:'https://youtu.be/RG7z0P9qrLk', ar:'سكوات كأسي بالدمبل', en:'Goblet Squat', sets:4, reps:'10-12', rest:'90-120', tip:'خلّي صدرك مرفوع وكعبيك ملاصقين للأرض.', alt:'الجلوس على الحائط', sk:'goblet', main:true},
-      {id:'kickback', v:'https://youtu.be/o5Kt4kZRfLY', aen:'Cable Kickback', av:'https://youtu.be/SqO-VUEak2M', ar:'جهاز المؤخرة (ركلة خلفية)', en:'Standing Glute Kickback Machine', sets:4, reps:'15', rest:'60-90', tip:'ادفعي المنصة للخلف من كعبك واعصري في النهاية.', alt:'رفس خلفي بالكيبل', sk:'kickback'},
-      {id:'legext', v:'https://youtu.be/4ZDm5EbiFI8', aen:'Step-Up', av:'https://youtu.be/9ZknEYboBOQ', ar:'جهاز تمديد الأرجل', en:'Leg Extension Machine', sets:4, reps:'12-15', rest:'60-90', tip:'ارفعي بتحكم واعصري الفخذ في الأعلى بدون اندفاع.', alt:'الصعود على المنصة', sk:'legext'},
-      {id:'adduction', v:'https://youtu.be/CjAVezAggkI', aen:'Side-Lying Leg Raise', av:'https://youtu.be/jgh6sGwtTwk', ar:'جهاز ضم الأرجل', en:'Hip Adduction Machine', sets:4, reps:'15', rest:'60-90', tip:'اضغطي ساقيك للداخل ببطء واعصري الفخذ الداخلي.', alt:'رفع الساق جانبيًا (مستلقية)', sk:'adduction'},
-      {id:'calfstep', v:'https://youtu.be/NPWkc5-6qD0', aen:'Leg Press Calf Raise', av:'https://youtu.be/dhRz1Ns60Zg', ar:'رفع السمانة على درجة', en:'Calf Raise on Step', sets:4, reps:'15-20', rest:'60-90', tip:'كعبك خارج الدرجة، انزلي لأقصى مدى ثم ارفعي لأعلى نقطة.', alt:'سمانة على جهاز الضغط', sk:'calfstep'},
-      {id:'birddog', v:'https://youtu.be/ZdAHe9_HeEw', aen:'Reverse Snow Angel', av:'https://youtu.be/0qLP2RNKX4A', ar:'تمرين الكلب الطائر', en:'Bird Dog', sets:4, reps:'10', rest:'60-90', tip:'مدي ذراع وساق معاكسة مع شد البطن وثبات الظهر.', alt:'ملاك الثلج المعكوس', sk:'birddog', bw:true},
+      {id:'legpress', v:'https://youtu.be/q4W4_VJbKW0', aen:'Lunges', av:'https://youtu.be/9gglI77Kzq8', ar:'جهاز دفع الأرجل', en:'Leg Press', sets:3, reps:'12-15', rest:'90-120', tip:'لا تقفلين ركبتيك في الأعلى وخلّي ظهرك ملاصق للمقعد.', alt:'طعنات (لانجز)', sk:'legpress', main:true},
+      {id:'goblet', v:'https://youtu.be/zBV3ceGyAxw', aen:'Wall Sit', av:'https://youtu.be/RG7z0P9qrLk', ar:'سكوات كأسي بالدمبل', en:'Goblet Squat', sets:3, reps:'10-12', rest:'90-120', tip:'خلّي صدرك مرفوع وكعبيك ملاصقين للأرض.', alt:'الجلوس على الحائط', sk:'goblet', main:true},
+      {id:'kickback', v:'https://youtu.be/o5Kt4kZRfLY', aen:'Cable Kickback', av:'https://youtu.be/SqO-VUEak2M', ar:'جهاز المؤخرة (ركلة خلفية)', en:'Standing Glute Kickback Machine', sets:3, reps:'15', rest:'60-90', tip:'ادفعي المنصة للخلف من كعبك واعصري في النهاية.', alt:'رفس خلفي بالكيبل', sk:'kickback'},
+      {id:'legext', v:'https://youtu.be/4ZDm5EbiFI8', aen:'Step-Up', av:'https://youtu.be/9ZknEYboBOQ', ar:'جهاز تمديد الأرجل', en:'Leg Extension Machine', sets:3, reps:'12-15', rest:'60-90', tip:'ارفعي بتحكم واعصري الفخذ في الأعلى بدون اندفاع.', alt:'الصعود على المنصة', sk:'legext'},
+      {id:'adduction', v:'https://youtu.be/CjAVezAggkI', aen:'Side-Lying Leg Raise', av:'https://youtu.be/jgh6sGwtTwk', ar:'جهاز ضم الأرجل', en:'Hip Adduction Machine', sets:3, reps:'15', rest:'60-90', tip:'اضغطي ساقيك للداخل ببطء واعصري الفخذ الداخلي.', alt:'رفع الساق جانبيًا (مستلقية)', sk:'adduction'},
+      {id:'calfstep', v:'https://youtu.be/NPWkc5-6qD0', aen:'Leg Press Calf Raise', av:'https://youtu.be/dhRz1Ns60Zg', ar:'رفع السمانة على درجة', en:'Calf Raise on Step', sets:3, reps:'15-20', rest:'60-90', tip:'كعبك خارج الدرجة، انزلي لأقصى مدى ثم ارفعي لأعلى نقطة.', alt:'سمانة على جهاز الضغط', sk:'calfstep'},
+      {id:'birddog', v:'https://youtu.be/ZdAHe9_HeEw', aen:'Reverse Snow Angel', av:'https://youtu.be/0qLP2RNKX4A', ar:'تمرين الكلب الطائر', en:'Bird Dog', sets:3, reps:'10', rest:'60-90', tip:'مدي ذراع وساق معاكسة مع شد البطن وثبات الظهر.', alt:'ملاك الثلج المعكوس', sk:'birddog', bw:true},
     ]},
   d4: { id:'d4', short:'علوي ب', title:'علوي ب', kt:'علـوي ب', sub:'كتف وذراع وكور', en:'UPPER B', zone:'upper', grad:'g-work4',
     ex:[
-      {id:'crow', v:'https://youtu.be/lJoozxC0Rns', aen:'Bent-Over Barbell Row', av:'https://youtu.be/bm0_q9bR_HA', ar:'تجديف جالس بالكيبل', en:'Seated Cable Row', sets:4, reps:'10-12', rest:'90-120', tip:'حافظي على ظهرك مستقيم ولا تتأرجحين بجذعك.', alt:'تجديف بالبار منحنية', sk:'crow', main:true},
-      {id:'incline', v:'https://youtu.be/aVf__6cm3qU', aen:'Push-Up', av:'https://youtu.be/jWxvty2KROs', ar:'بنش مائل بالدمبل', en:'Incline Dumbbell Press', sets:4, reps:'10-12', rest:'90-120', tip:'انزلي بتحكم لين تحسين بتمدد بسيط بدون ألم في الكتف.', alt:'تمرين الضغط (بوش أب)', sk:'incline', main:true},
-      {id:'spress', v:'https://youtu.be/URsPE-HAGIg', aen:'Barbell Overhead Press', av:'https://youtu.be/2yjwXTZQDDI', ar:'ضغط الكتف بالدمبل', en:'Dumbbell Shoulder Press', sets:4, reps:'8-10', rest:'90-120', tip:'ادفعي لأعلى بدون قفل المرفقين بالكامل.', alt:'ضغط الكتف بالبار', sk:'spress', main:true},
-      {id:'lateral', v:'https://youtu.be/XPPfnSEATJA', aen:'Rear Delt Fly', av:'https://youtu.be/p1yQnTNE808', ar:'رفرفة جانبية', en:'Dumbbell Lateral Raise', sets:4, reps:'12-15', rest:'60-90', tip:'ارفعي لمستوى الكتف فقط وقودي الحركة بمرفقك.', alt:'رفرفة خلفية', sk:'lateral'},
-      {id:'ytw', v:'https://youtu.be/R6hm0NI_e58', aen:'Pike Push-Up', av:'https://youtu.be/XckEEwa1BPI', ar:'رفع Y-T-W منبطحة', en:'Prone Y-T-W Raise', sets:4, reps:'12', rest:'60-90', tip:'منبطحة، ارفعي ذراعيك على شكل Y ثم T ثم W مع إبهام لأعلى وبدون رفع الكتفين.', alt:'ضغط بايك (للكتف بوزن الجسم)', sk:'ytw', bw:true},
-      {id:'pecdeck', v:'https://youtu.be/K2VJ4HeXb4s', aen:'Cable Crossover', av:'https://youtu.be/hhruLxo9yZU', ar:'جهاز التفتيح (بيك ديك)', en:'Pec Deck Machine Fly', sets:4, reps:'12-15', rest:'60-90', tip:'اجمعي ذراعيك قدامك ببطء واعصري الصدر في المنتصف.', alt:'تقاطع الكيبل للصدر', sk:'pecdeck'},
-      {id:'sideplank', v:'https://youtu.be/N_s9em1xTqU', aen:'Plank', av:'https://youtu.be/pvIjsG5Svck', ar:'بلانك جانبي', en:'Side Plank', sets:4, reps:'20', rest:'60-90', tip:'ارفعي وركك وخلّي جسمك خط مستقيم من الكتف للقدم.', alt:'بلانك (الثبات)', sk:'sideplank', bw:true},
+      {id:'crow', v:'https://youtu.be/lJoozxC0Rns', aen:'Bent-Over Barbell Row', av:'https://youtu.be/bm0_q9bR_HA', ar:'تجديف جالس بالكيبل', en:'Seated Cable Row', sets:3, reps:'10-12', rest:'90-120', tip:'حافظي على ظهرك مستقيم ولا تتأرجحين بجذعك.', alt:'تجديف بالبار منحنية', sk:'crow', main:true},
+      {id:'incline', v:'https://youtu.be/aVf__6cm3qU', aen:'Push-Up', av:'https://youtu.be/jWxvty2KROs', ar:'بنش مائل بالدمبل', en:'Incline Dumbbell Press', sets:3, reps:'10-12', rest:'90-120', tip:'انزلي بتحكم لين تحسين بتمدد بسيط بدون ألم في الكتف.', alt:'تمرين الضغط (بوش أب)', sk:'incline', main:true},
+      {id:'spress', v:'https://youtu.be/URsPE-HAGIg', aen:'Barbell Overhead Press', av:'https://youtu.be/2yjwXTZQDDI', ar:'ضغط الكتف بالدمبل', en:'Dumbbell Shoulder Press', sets:3, reps:'8-10', rest:'90-120', tip:'ادفعي لأعلى بدون قفل المرفقين بالكامل.', alt:'ضغط الكتف بالبار', sk:'spress', main:true},
+      {id:'lateral', v:'https://youtu.be/XPPfnSEATJA', aen:'Rear Delt Fly', av:'https://youtu.be/p1yQnTNE808', ar:'رفرفة جانبية', en:'Dumbbell Lateral Raise', sets:3, reps:'12-15', rest:'60-90', tip:'ارفعي لمستوى الكتف فقط وقودي الحركة بمرفقك.', alt:'رفرفة خلفية', sk:'lateral'},
+      {id:'ytw', v:'https://youtu.be/R6hm0NI_e58', aen:'Pike Push-Up', av:'https://youtu.be/XckEEwa1BPI', ar:'رفع Y-T-W منبطحة', en:'Prone Y-T-W Raise', sets:3, reps:'12', rest:'60-90', tip:'منبطحة، ارفعي ذراعيك على شكل Y ثم T ثم W مع إبهام لأعلى وبدون رفع الكتفين.', alt:'ضغط بايك (للكتف بوزن الجسم)', sk:'ytw', bw:true},
+      {id:'pecdeck', v:'https://youtu.be/K2VJ4HeXb4s', aen:'Cable Crossover', av:'https://youtu.be/hhruLxo9yZU', ar:'جهاز التفتيح (بيك ديك)', en:'Pec Deck Machine Fly', sets:3, reps:'12-15', rest:'60-90', tip:'اجمعي ذراعيك قدامك ببطء واعصري الصدر في المنتصف.', alt:'تقاطع الكيبل للصدر', sk:'pecdeck'},
+      {id:'sideplank', v:'https://youtu.be/N_s9em1xTqU', aen:'Plank', av:'https://youtu.be/pvIjsG5Svck', ar:'بلانك جانبي', en:'Side Plank', sets:3, reps:'20', rest:'60-90', tip:'ارفعي وركك وخلّي جسمك خط مستقيم من الكتف للقدم.', alt:'بلانك (الثبات)', sk:'sideplank', bw:true},
     ]},
 };
 
@@ -1012,7 +1108,9 @@ const Store = {
     } catch (e) { console.warn(e); }
     this.migrate(); setSync(); render();
   },
-  migrate() { if (!S.settings.v2) { S.settings.programStart = '2026-11-08'; S.settings.mealStart = '2026-11-08'; S.settings.mealOv = {}; S.settings.v2 = 1; this.touch('settings'); } },
+  migrate() {
+    if (!S.settings.v3) { const fix = [['2026-11-08', 'abduction', 'adduction'], ['2026-11-11', 'adduction', 'abduction']]; for (const [k, from, to] of fix) { const s = S.days[k]?.session; if (s?.sets?.[from]?.some(x => x.ok)) { (s.did ||= {})[from] = to; this.touch(k); } } S.settings.v3 = 1; this.touch('settings'); }
+    if (!S.settings.v2) { S.settings.programStart = '2026-11-08'; S.settings.mealStart = '2026-11-08'; S.settings.mealOv = {}; S.settings.v2 = 1; this.touch('settings'); } },
   col() { return this.db.collection('data/users/' + this.uid); },
   async pull() {
     const snap = await Promise.race([this.col().get(), new Promise((_, r) => setTimeout(() => r(new Error('timeout')), 10000))]);
@@ -1212,11 +1310,32 @@ function otherTotals(m) {
   if (m?.items?.length) return m.items.reduce((t, i) => ({ k: t.k + (i.k || 0), p: t.p + (i.p || 0), c: t.c + (i.c || 0), f: t.f + (i.f || 0) }), { k: 0, p: 0, c: 0, f: 0 });
   return { k: num(m?.kcal) || 0, p: 0, c: 0, f: 0 };
 }
+const PORTIONS = [['ملعقة', 15], ['إبهام', 30], ['نص كوب', 75], ['كف', 100], ['كوب', 150], ['صحن', 250]];
+const EST = [['أصغر بكثير', .5], ['أصغر', .75], ['نفسها تقريبًا', 1], ['أكبر', 1.25], ['أكبر بكثير', 1.5]];
+function adderHtml() { return `<div class="additem"><input id="fq" placeholder="ابحثي: صدر دجاج، رز، تفاح…" autocomplete="off"><div id="fsug" class="fsug"></div>
+              <div id="fpick" style="display:none"><div class="fpick-h"><b id="fname"></b><span id="fper" class="num mut"></span></div>
+                <div class="gchips">${PORTIONS.map(([l, g]) => `<button data-g="${g}"><b>${l}</b><small>${g}غ</small></button>`).join('')}</div>
+                <div style="display:flex;gap:8px;margin-top:8px"><label class="inbox" style="flex:1"><input id="fg" inputmode="decimal" placeholder="0"><span>غرام</span></label><button class="pill dark" id="fadd" style="height:52px">أضيفي</button></div>
+                <div id="fcalc" class="num hint" style="margin-top:6px"></div></div>
+              <button class="addnote" id="fman" style="margin-top:8px">صنف مو موجود بالجدول؟ أضيفيه بنفسك</button>
+              <div id="fmanbox" style="display:none;margin-top:8px"><div class="field" style="background:#F4F5F7"><label>اسم الصنف</label><input id="mn"></div><div class="row2"><div class="field" style="background:#F4F5F7"><label>سعرات</label><input id="mk" class="num" inputmode="decimal"></div><div class="field" style="background:#F4F5F7"><label>بروتين (غ) اختياري</label><input id="mp" class="num" inputmode="decimal"></div></div><button class="pill dark block" id="madd">أضيفي</button></div></div>`; }
+function bindAdder(root, addItem) {
+        let sel = null;
+        const calc = () => { const g = num($('#fg').value) || 0; $('#fcalc').textContent = sel && g ? `= ${Math.round(sel[1] * g / 100)} سعرة · ب ${r1(sel[2] * g / 100)} · ك ${r1(sel[3] * g / 100)} · د ${r1(sel[4] * g / 100)}` : ''; };
+        const choose = r => { sel = r; $('#fsug').innerHTML = ''; $('#fq').value = r[0]; $('#fpick').style.display = ''; $('#fname').textContent = r[0]; $('#fper').textContent = `لكل 100غ: ${r[1]} سعرة · ب ${r[2]}`; $('#fg').focus(); calc(); };
+        $('#fq').oninput = () => { sel = null; $('#fpick').style.display = 'none'; const res = refSearch($('#fq').value); $('#fsug').innerHTML = res.map((r, i) => `<button data-r="${i}"><b>${r[0]}</b><span class="num">${r[1]} سعرة/100غ</span></button>`).join('') || ($('#fq').value.trim() ? '<div class="hint" style="padding:8px 4px">ما لقيته بالجدول. أضيفيه بنفسك من الرابط تحت.</div>' : ''); $$('#fsug [data-r]').forEach(b => b.onclick = () => choose(res[Number(b.dataset.r)])); };
+        $$('[data-g]', root).forEach(b => b.onclick = () => { $('#fg').value = b.dataset.g; calc(); });
+        $('#fg').oninput = calc;
+        $('#fadd').onclick = () => { const g = num($('#fg').value); if (!sel || !g) { toast('اختاري الصنف واكتبي الوزن'); return; } addItem({ n: sel[0], g, k: sel[1] * g / 100, p: sel[2] * g / 100, c: sel[3] * g / 100, f: sel[4] * g / 100 }); };
+        $('#fman').onclick = () => { $('#fmanbox').style.display = ''; $('#mn').value = $('#fq').value; $('#mk').focus(); };
+        $('#madd').onclick = () => { const n = $('#mn').value.trim(), kk = num($('#mk').value); if (!n || kk == null) { toast('اكتبي الاسم والسعرات'); return; } addItem({ n, k: kk, p: num($('#mp').value) || 0, c: 0, f: 0, manual: 1 }); };
+}
 const otherName = m => m?.items?.length ? m.items.map(i => i.n).join('، ') : (m?.text || 'وجبة بديلة');
 function mealsCard(k) {
   const idx = planIdx(k), P = PLAN[idx], meals = peek(k).meals || {};
   let kcal = 0, prot = 0;
-  for (const [s] of MEAL_SLOTS) { const m = meals[s]; if (!m) continue; if (m.st === 'ate') { kcal += P[s].kcal; prot += P[s].p; } else if (m.st === 'other') { const t = otherTotals(m); kcal += t.k; prot += t.p; } }
+  const ex = otherTotals(peek(k).extra || {}); kcal += ex.k; prot += ex.p; let planRest = 0;
+  for (const [s] of MEAL_SLOTS) { const m = meals[s]; if (!m) { planRest += P[s].kcal; continue; } if (m.st === 'ate') { kcal += P[s].kcal; prot += P[s].p; } else if (m.st === 'other') { const t = otherTotals(m); kcal += t.k; prot += t.p; } }
   const rows = MEAL_SLOTS.map(([s, lbl]) => {
     const m = P[s], st = meals[s];
     const badge = st?.st === 'ate' ? '<span class="st ate">أكلتها ✓</span>' : st?.st === 'other' ? `<span class="st alt">بديل ✓</span>` : '<span class="st">—</span>';
@@ -1224,8 +1343,10 @@ function mealsCard(k) {
   }).join('');
   return `<div class="sec"><h2>أكـل اليـوم</h2><button class="link" onclick="A.pickPlanDay('${k}')">${k < S.settings.mealStart && S.settings.mealOv[k] == null ? 'يبدأ ' + fmtLong(S.settings.mealStart) + ' · معاينة' : 'يوم ' + (idx + 1) + ' · يتكرر أسبوعيًا'} ▾</button></div>
     <div class="card list" style="padding:6px 16px">${rows}</div>
-    <div class="card" style="padding:14px 16px"><div class="kcalbar"><span>المسجّل <b>${fmtN(kcal)}</b> / ${TARGETS.kcal} سعرة</span><span>بروتين <b>${Math.round(prot)}</b> / ${TARGETS.p}غ</span></div><div class="bar"><i style="width:${Math.min(100, kcal / TARGETS.kcal * 100)}%"></i></div>
-    <div class="hint" style="margin-top:8px">مجموع جدول اليوم ${P.total} سعرة، ولك ${TARGETS.kcal - P.total} سعرة مفتوحة (قهوة بحليب، فاكهة، قطعة شوكولاتة).</div></div>`;
+    <button class="card extra-row" onclick="A.extras('${k}')"><span class="cyc-ic" style="background:#FFF1D6">☕️</span><span class="tx"><b>إضافات خارج الوجبات</b><span>${(peek(k).extra?.items || []).length ? (peek(k).extra.items.map(i => i.n).join('، ') + ' · ' + Math.round(ex.k) + ' سعرة') : 'قهوة بحليب، فاكهة، قطعة شوكولاتة… من الـ150 المفتوحة'}</span></span><span class="pls">+</span></button>
+    ${(() => { const left = TARGETS.kcal - kcal, proj = kcal + planRest, lv = kcal > TARGETS.kcal + 50 ? 'over' : left <= 150 ? 'near' : 'ok'; return `<div class="card kcard ${lv}"><div class="kc-top"><div><span class="hint">${left >= 0 ? 'باقي لك اليوم' : 'تعديتي هدف اليوم بـ'}</span><div class="num kbig">${fmtN(Math.abs(left))}<small> سعرة</small></div></div><div class="kring" style="--p:${Math.min(100, kcal / TARGETS.kcal * 100)}"><span class="num">${Math.round(kcal / TARGETS.kcal * 100)}%</span></div></div>
+      <div class="kcalbar"><span>المسجّل <b>${fmtN(kcal)}</b> / ${TARGETS.kcal}</span><span>بروتين <b>${Math.round(prot)}</b> / ${TARGETS.p}غ</span></div><div class="bar"><i style="width:${Math.min(100, kcal / TARGETS.kcal * 100)}%"></i></div>
+      <div class="kmsg">${planRest ? (proj <= TARGETS.kcal ? `✓ لو كمّلتي باقي وجبات الجدول بتقفلين اليوم على ${fmtN(proj)} سعرة، ضمن هدفك.` : `لو كمّلتي باقي الوجبات بتوصلين ${fmtN(proj)}، يعني أكثر بـ ${fmtN(proj - TARGETS.kcal)}. خففي الوجبة الجاية أو اختاري سناك أخف.`) : kcal <= TARGETS.kcal ? '🎉 سجلتي كل وجباتك وقفلتي اليوم ضمن هدفك.' : `سجلتي كل الوجبات، وزدتي ${fmtN(kcal - TARGETS.kcal)} سعرة. عادي، بكرة ترجعين للجدول بدون تعويض.`}</div></div>`; })()}</div>`;
 }
 function bodyCard(k) {
   const D = peek(k);
@@ -1234,7 +1355,7 @@ function bodyCard(k) {
     <div class="field" style="background:#F4F5F7;margin:0"><label>الخصر (سم) · كل أسبوعين</label><input class="num" inputmode="decimal" value="${esc(D.waist ?? '')}" placeholder="—" onchange="A.setF('${k}','waist',this.value)"></div></div>
     <div style="margin:14px 0 6px;font-size:13px;color:var(--mut)">طاقتي اليوم</div>
     <div class="energy">${['😴', '😕', '🙂', '😊', '⚡️'].map((e, i) => `<button class="${D.energy === i + 1 ? 'on' : ''}" onclick="A.setF('${k}','energy',${i + 1},1)">${e}</button>`).join('')}</div>
-    <div class="toggle" style="margin-top:12px"><span style="font-size:14px">أيام الدورة <span class="hint">· المدربة تنصح تتبعينها شهرين</span></span><button class="sw ${D.period ? 'on' : ''}" onclick="A.setF('${k}','period',${!D.period},1)"></button></div>
+    ${(() => { const ci = cycleInfo(k); return `<button class="cyc" onclick="A.period('${k}')"><span class="cyc-ic">🌸</span><span class="tx"><b>الدورة الشهرية</b><span>${ci ? (ci.inP ? `اليوم ${ci.cd} من الدورة` : `اليوم ${ci.cd} · ${ci.phase[0]} · المتوقعة ${fmtLong(ci.next)}`) : 'سجّلي أيامها وأتوقع لك الجاية'}</span></span><span class="sw ${D.period ? 'on' : ''}" onclick="event.stopPropagation();A.setF('${k}','period',${!D.period},1)"></span></button>${ci && ci.preWeight ? '<p class="hint" style="margin:6px 4px 0">⚖️ هالأيام الوزن ممكن يزيد ماء، لا تقيسينه أو لا تعتمدين عليه.</p>' : ''}`; })()}
     <div class="field" style="background:#F4F5F7;margin:12px 0 0"><label>ملاحظة اليوم (جوع، طاقة، مزاج…)</label><textarea rows="2" onchange="A.setF('${k}','note',this.value)" placeholder="اكتبي هنا…">${esc(D.note || '')}</textarea></div>
   </div>`;
 }
@@ -1251,7 +1372,7 @@ function viewCal() {
   for (let d = 1; d <= nDays; d++) {
     const k = `${y}-${pad(m)}-${pad(d)}`, D = peek(k), w = workoutFor(k), dn = isDone(k);
     if (w && k <= t) planned++; if (dn) done++;
-    const dots = [(D.water || 0) >= waterGoal(k) ? '#3D8BFF' : '', (D.steps || 0) >= S.settings.stepsGoal ? '#34C759' : '', lvlSleep(sleepMins(D.sleep))[0] === 'ok' ? '#8E6CFF' : ''].filter(Boolean);
+    const dots = [D.period ? '#FF5A8A' : '', (D.water || 0) >= waterGoal(k) ? '#3D8BFF' : '', (D.steps || 0) >= S.settings.stepsGoal ? '#34C759' : '', lvlSleep(sleepMins(D.sleep))[0] === 'ok' ? '#8E6CFF' : ''].filter(Boolean);
     g += `<button class="c ${w && !dn ? 'plan' : ''} ${dn ? 'done' : ''} ${k === t ? 'today' : ''}" onclick="A.daySheet('${k}')">${d}<span class="ds">${dots.map(c => `<i style="background:${c}"></i>`).join('')}</span></button>`;
   }
   const sch = S.settings.schedule;
@@ -1260,7 +1381,8 @@ function viewCal() {
   return header('التواريخ ميلادية', 'التقويـم')
     + `<div class="card"><div class="cal-h"><button class="iconbtn" style="width:36px;height:36px" onclick="A.calNav(-1)">${I.chevR}</button><b>${MONTHS[m - 1]} ${y}</b><button class="iconbtn" style="width:36px;height:36px" onclick="A.calNav(1)">${I.chevL}</button></div>
       <div class="cal">${g}</div>
-      <div class="legend"><span><i style="background:linear-gradient(140deg,#FF8A5B,#7C97FF)"></i>تمرين منجز</span><span><i style="box-shadow:inset 0 0 0 1.5px #111"></i>تمرين مخطط</span><span><i style="background:#3D8BFF;border-radius:50%"></i>ماء</span><span><i style="background:#34C759;border-radius:50%"></i>خطوات</span><span><i style="background:#8E6CFF;border-radius:50%"></i>نوم</span></div></div>
+      <div class="legend"><span><i style="background:linear-gradient(140deg,#FF8A5B,#7C97FF)"></i>تمرين منجز</span><span><i style="box-shadow:inset 0 0 0 1.5px #111"></i>تمرين مخطط</span><span><i style="background:#3D8BFF;border-radius:50%"></i>ماء</span><span><i style="background:#34C759;border-radius:50%"></i>خطوات</span><span><i style="background:#8E6CFF;border-radius:50%"></i>نوم</span><span><i style="background:#FF5A8A;border-radius:50%"></i>دورة</span></div></div>
+    ${(() => { const ci = cycleInfo(); return `<button class="card cyc big" onclick="A.period(todayKey())" style="width:100%"><span class="cyc-ic">🌸</span><span class="tx"><b>الدورة الشهرية</b><span>${ci ? `اليوم ${ci.cd} · ${ci.phase[0]} · المتوقعة ${fmtLong(ci.next)}` : 'سجّلي أيامها وأتوقع لك الجاية'}</span></span>${I.chevL}</button>`; })()}
     <div class="stats" style="grid-template-columns:repeat(2,1fr);margin-bottom:12px"><div><b>${done}</b><span>تمرين منجز هالشهر</span></div><div><b>${planned ? Math.round(Math.min(done, planned) / planned * 100) : 0}%</b><span>الالتزام بالأيام المخططة</span></div></div>
     <div class="sec"><h2>أيـام التمريـن</h2></div>
     <div class="card"><table class="tbl">${schRows}</table><p class="hint" style="margin:10px 0 0">هذا الجدول الأسبوعي الثابت. لو بتنقلين تمرين يوم واحد بس، اضغطي على اليوم في التقويم.</p></div>`;
@@ -1297,7 +1419,7 @@ function viewProg() {
   const wPts = keys.filter(k => num(peek(k).weight)).map(k => [k, num(peek(k).weight)]);
   // تقدم تمرين
   const exList = Object.values(WORKOUTS).flatMap(W => W.ex.filter(e => !e.bw).map(e => [e.id, e.en, W.title]));
-  const exPts = sess.map(k => { const s = sessionOf(k).sets?.[UI.progEx]; if (!s) return null; const ok = s.filter(x => x.ok && num(x.w)); if (!ok.length) return null; const best = ok.reduce((a, b) => num(b.w) > num(a.w) ? b : a); return [k, num(best.w), best.r]; }).filter(Boolean);
+  const exPts = sess.map(k => { const ss = sessionOf(k), dk = didKey(ss, UI.progEx); const s = dk ? ss.sets[dk] : null; if (!s) return null; const ok = s.filter(x => x.ok && num(x.w)); if (!ok.length) return null; const best = ok.reduce((a, b) => num(b.w) > num(a.w) ? b : a); return [k, num(best.w), best.r]; }).filter(Boolean);
   const log = keys.filter(k => { const D = S.days[k]; return D.session?.end || D.steps || D.water || D.sleep || D.meals || D.weight || D.note; }).reverse().slice(0, 60);
   return header('كل شي محفوظ هنا', 'التقـدّم')
     + `<div class="stats" style="margin-bottom:12px">
@@ -1351,17 +1473,20 @@ const totalSets = s => Object.values(s.sets || {}).reduce((a, arr) => a + arr.le
 const setsDone = s => Object.values(s.sets || {}).reduce((a, arr) => a + arr.filter(x => x.ok).length, 0);
 const exDone = (s, id) => { const arr = (s.sets || {})[id] || []; return arr.length > 0 && arr.every(x => x.ok); };
 const progOf = s => { const ex = WORKOUTS[s.w].ex; const d = ex.filter(e => exDone(s, e.id)).length + (s.cardio?.ok ? 1 : 0); return { d, t: ex.length + 1 }; };
+const didKey = (s, exId) => { const sets = s?.sets || {}, did = s?.did || {}; for (const key in sets) if ((did[key] || key) === exId && sets[key].some(x => x.ok)) return key; return null; };
 function lastFor(exId, beforeKey) {
-  const ks = Object.keys(S.days).filter(k => k < beforeKey && S.days[k].session?.sets?.[exId]?.some(x => x.ok)).sort();
-  const k = ks[ks.length - 1]; return k ? { k, sets: S.days[k].session.sets[exId].filter(x => x.ok) } : null;
+  const ks = Object.keys(S.days).filter(k => k < beforeKey && didKey(S.days[k].session, exId)).sort();
+  const k = ks[ks.length - 1]; if (!k) return null; const s = S.days[k].session; return { k, sets: s.sets[didKey(s, exId)].filter(x => x.ok) };
 }
+const ALL_EX = () => Object.values(WORKOUTS).flatMap(W => exOf(W.id));
 function sessionStats(k) {
   const s = sessionOf(k); if (!s) return null;
   let vol = 0, dsum = 0, dn = 0, done = 0; const tops = [];
   for (const e of exOf(s.w)) {
     const arr = (s.sets || {})[e.id] || []; let best = null;
     for (const x of arr) if (x.ok) { done++; const w = num(x.w) || 0, r = num(x.r) || 0; vol += w * r; if (x.d) { dsum += x.d; dn++; } if (w && (!best || w > num(best.w))) best = x; }
-    if (best) tops.push({ en: s.alt?.[e.id] ? (e.aen || e.alt) : e.en, ar: s.alt?.[e.id] ? e.alt : e.ar, w: num(best.w), r: best.r });
+    const pe = s.did?.[e.id] ? (ALL_EX().find(z => z.id === s.did[e.id]) || e) : e;
+    if (best) tops.push({ en: s.alt?.[e.id] ? (e.aen || e.alt) : pe.en, ar: s.alt?.[e.id] ? e.alt : pe.ar, w: num(best.w), r: best.r });
   }
   return { dur: s.start ? ((s.end || Date.now()) - s.start) / 1000 : 0, vol, done, total: totalSets(s), eff: dn ? dsum / dn : 0, tops };
 }
@@ -1398,35 +1523,30 @@ function cardioCard(s) {
     <button class="pill ${c.ok ? 'ghost' : 'dark'} block" style="margin-top:12px" onclick="A.cardioOk()" ${c.id ? '' : 'disabled'}>${c.ok ? 'تراجعي' : 'خلصت الكارديو ✓'}</button></div>`;
 }
 const DIFF = ['سهل', 'متوسط', 'صعب', 'للآخر'];
-function exCard(s, k, e, ei, n) {
+function exCard(s, k, e0, ei, n) {
+  const e = s.did?.[e0.id] ? Object.assign({}, e0, (ALL_EX().find(z => z.id === s.did[e0.id]) || {}), { id: e0.id }) : e0;
   const arr = s.sets[e.id], last = lastFor(e.id, k), alt = !!s.alt[e.id];
   const allTop = last && last.sets.length >= arr.length && last.sets.every(x => (num(x.r) || 0) >= topRep(e.reps));
   const done = exDone(s, e.id);
   const rows = arr.map((x, i) => {
     const ph = last?.sets[i] || last?.sets[last.sets.length - 1];
-    if (x.ok && !x.ed) return `<button class="set done" onclick="A.editSet('${e.id}',${i})"><span class="sd">${I.ok}</span><span class="sn">الجولة ${i + 1}</span><b class="sv">${e.bw && !x.w ? '' : `${esc(x.w || '—')} كجم × `}${esc(x.r || '—')}</b>${x.d ? `<span class="dchip d${x.d}">${DIFF[x.d - 1]}</span>` : ''}${x.n ? '<span class="mut">📝</span>' : ''}</button>`;
-    return `<div class="set ${x.ok ? 'ok' : ''}">
-      <div class="set-top"><span class="sn">الجولة ${i + 1}</span>${ph ? `<span class="lastc">آخر مرة <b dir="ltr">${e.bw && !ph.w ? '' : esc(ph.w || '-') + '×'}${esc(ph.r || '-')}</b></span>` : ''}</div>
-      <div class="set-in">
-        ${e.bw ? `<label class="inbox bw"><input id="in-${e.id}-${i}-w" inputmode="decimal" placeholder="+0" value="${esc(x.w)}" oninput="A.setV('${e.id}',${i},'w',this.value)"><span>كجم إضافي</span></label>`
-              : `<label class="inbox"><input id="in-${e.id}-${i}-w" inputmode="decimal" placeholder="${esc(ph?.w || '0')}" value="${esc(x.w)}" oninput="A.setV('${e.id}',${i},'w',this.value)"><span>كجم</span></label>`}
-        <label class="inbox"><input id="in-${e.id}-${i}-r" inputmode="numeric" placeholder="${esc(ph?.r || e.reps.split('-')[0])}" value="${esc(x.r)}" oninput="A.setV('${e.id}',${i},'r',this.value)"><span>عدة</span></label>
-        <button class="go" onclick="A.setOk('${e.id}',${i})" aria-label="خلصت الجولة">${I.ok}</button>
-      </div>
-      <div class="diff">${DIFF.map((l, di) => `<button data-v="${di + 1}" class="${x.d === di + 1 ? 'on' : ''}" onclick="A.setD('${e.id}',${i},${di + 1})">${l}</button>`).join('')}</div>
-      ${x.n || x.showN ? `<input class="setnote" placeholder="ملاحظة على هذي الجولة…" value="${esc(x.n)}" oninput="A.setV('${e.id}',${i},'n',this.value)">` : `<button class="addnote" onclick="A.showNote('${e.id}',${i})">+ ملاحظة</button>`}
+    if (x.ok && !x.ed) return `<button class="srow done" onclick="A.editSet('${e.id}',${i})"><span class="sn">${i + 1}</span><b class="sv">${e.bw && !x.w ? 'وزن الجسم' : `${esc(x.w || '—')} <small>كجم</small>`}</b><b class="sv">${esc(x.r || '—')} <small>عدة</small></b>${x.d ? `<span class="dchip d${x.d}">${DIFF[x.d - 1]}</span>` : '<span></span>'}<span class="ck on">${I.ok}</span></button>`;
+    return `<div class="srow ${x.ed ? 'ed' : ''}"><span class="sn">${i + 1}</span>
+      <label class="inbox"><input id="in-${e.id}-${i}-w" inputmode="decimal" placeholder="${e.bw ? '+0' : esc(ph?.w || '0')}" value="${esc(x.w)}" oninput="A.setV('${e.id}',${i},'w',this.value)"><span>${e.bw ? '+كجم' : 'كجم'}</span></label>
+      <label class="inbox"><input id="in-${e.id}-${i}-r" inputmode="numeric" placeholder="${esc(ph?.r || e.reps.split('-')[0])}" value="${esc(x.r)}" oninput="A.setV('${e.id}',${i},'r',this.value)"><span>عدة</span></label>
+      <button class="ck" onclick="A.setOk('${e.id}',${i})" aria-label="خلصت الجولة">${I.ok}</button>
+      ${x.ed ? `<div class="ed-ex"><div class="diff">${DIFF.map((l, di) => `<button data-v="${di + 1}" class="${x.d === di + 1 ? 'on' : ''}" onclick="A.setD('${e.id}',${i},${di + 1})">${l}</button>`).join('')}</div><input class="setnote" placeholder="ملاحظة على الجولة…" value="${esc(x.n)}" oninput="A.setV('${e.id}',${i},'n',this.value)"></div>` : ''}
     </div>`;
   }).join('');
   return `<div class="excard ${done ? 'done' : ''}" id="ex-${e.id}">
-    <div class="ex-h"><div class="sk-box">${Sketch.ex(e.sk)}</div><div style="flex:1;min-width:0">
-      <div class="ex-meta"><span class="num">${ei + 1} / ${n}</span>${done ? '<span class="badge ok" style="background:#DDF5E6">تم ✓</span>' : ''}<button class="editbtn" onclick="A.editEx('${e.id}')">✎ تعديل</button></div>
-      <b class="exn">${alt ? (e.aen || esc(e.alt)) : esc(e.en)}</b><span class="en ar">${alt ? esc(e.alt) : esc(e.ar)}</span>
-      <div class="rx"><span>${arr.length} × ${e.reps}</span><span>راحة ${e.rest}ث</span>${e.main ? '<span class="ar">أساسي</span>' : ''}${e.bw ? '<span class="ar">وزن الجسم</span>' : ''}</div></div></div>
-    ${e.alt ? `<div class="altseg"><button class="${alt ? '' : 'on'}" onclick="A.setAlt('${e.id}',0)">الأصلي</button><button class="${alt ? 'on' : ''}" onclick="A.setAlt('${e.id}',1)">البديل · <span class="exn">${e.aen || esc(e.alt)}</span></button></div>` : ''}
-    <div class="vids">${vid(alt ? e.av : e.v, 'فيديو الشرح')}${!alt && e.av ? vid(e.av, 'شوفي فيديو البديل') : ''}</div>
-    <div class="tip">💡 ${esc(e.tip)}</div>
-    ${allTop ? '<div class="up">⬆️ كمّلتي العدد الأعلى بكل الجولات آخر مرة. زيدي الوزن خطوة (≈2 كجم) وارجعي لأقل التكرارات.</div>' : ''}
-    <div class="sets">${rows}</div>
+    <div class="ex-h2"><div class="sk-box sm">${Sketch.ex(e.sk)}</div><div class="ex-t">
+      <div class="ex-meta"><span class="num">${ei + 1}/${n}</span><span>${arr.length} × ${e.reps}</span><span>راحة ${e.rest}ث</span>${done ? '<span class="okb">تم ✓</span>' : ''}<button class="editbtn" onclick="A.editEx('${e0.id}')">✎</button></div>
+      <b class="exn">${alt ? (e.aen || esc(e.alt)) : esc(e.en)}</b><span class="en ar">${alt ? esc(e.alt) : esc(e.ar)}${s.did?.[e0.id] ? ' <span class="mut">(اللي سويتيه)</span>' : ''}</span></div></div>
+    <div class="ex-tools">${vid(alt ? e.av : e.v, 'الشرح')}${e.alt ? `<div class="altseg sm"><button class="${alt ? '' : 'on'}" onclick="A.setAlt('${e.id}',0)">الأصلي</button><button class="${alt ? 'on' : ''}" onclick="A.setAlt('${e.id}',1)">البديل</button></div>` : ''}${!alt && e.av ? vid(e.av, 'البديل') : ''}</div>
+    <details class="tipd"><summary>💡 ${esc(e.tip.split(/[.،]/)[0])}…</summary><p>${esc(e.tip)}${alt ? '' : e.aen ? `<br><span class="mut">البديل: <span class="exn" style="display:inline;font-size:13px">${e.aen}</span> · ${esc(e.alt)}</span>` : ''}</p></details>
+    ${allTop ? '<div class="up">⬆️ كمّلتي العدد الأعلى آخر مرة. زيدي الوزن خطوة.</div>' : ''}
+    ${last ? `<div class="lastline">آخر مرة: <b dir="ltr">${last.sets.map(x => `${e.bw && !x.w ? '' : (x.w || '-') + '×'}${x.r || '-'}`).join('  ·  ')}</b></div>` : ''}
+    <div class="srows">${rows}</div>
     <div class="setctl"><button onclick="A.addSet('${e.id}')">+ جولة</button><button onclick="A.delSet('${e.id}')" ${arr.length <= 1 ? 'disabled' : ''}>− جولة</button></div>
   </div>`;
 }
@@ -1464,7 +1584,7 @@ function renderSession() {
   </div>`;
 }
 /* ----- مؤقت الراحة ----- */
-let restInt = null, restEnd = 0, restTotal = 60, audioCtx = null;
+let restInt = null, restEnd = 0, restTotal = 60, audioCtx = null, RREF = null;
 function unlockAudio() { try { audioCtx ||= new (window.AudioContext || window.webkitAudioContext)(); if (audioCtx.state === 'suspended') audioCtx.resume(); const o = audioCtx.createOscillator(), g = audioCtx.createGain(); g.gain.value = 0.0001; o.connect(g).connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime + .02); } catch (e) { } }
 function beep() {
   try { if (navigator.audioSession) navigator.audioSession.type = 'transient'; } catch (e) { }
@@ -1483,14 +1603,16 @@ const TIPS = {
   4: ['وصلتي للآخر! لو التكنيك بدأ يخرب، خففي الوزن خطوة.', 'جهد عالي 👏 الجولة الجاية وقّفي وأنتِ قادرة على تكرارين زيادة.', 'اشربي موية وتنفسي. الأداء النظيف أهم من الثقل.'],
 };
 const pick = a => a[Math.floor(Math.random() * a.length)];
-function startRest(nextTxt, d) {
+function startRest(nextTxt, d, ref) {
+  RREF = ref || null;
   restTotal = S.settings.restSec; restEnd = Date.now() + restTotal * 1000; unlockAudio();
   const r = $('#rest'); r.classList.remove('end');
   r.innerHTML = `<div class="box"><div class="rest-h"><h4>استريحـي</h4><button class="x" onclick="A.restSkip()">${I.x}</button></div>
     <div class="ring"><svg viewBox="0 0 120 120"><defs><linearGradient id="rg" x1="0" x2="1"><stop offset="0" stop-color="#FF6A3D"/><stop offset="1" stop-color="#3D6BFF"/></linearGradient></defs><circle cx="60" cy="60" r="52" fill="none" stroke="rgba(0,0,0,.07)" stroke-width="7"/><circle id="rArc" cx="60" cy="60" r="52" fill="none" stroke="url(#rg)" stroke-width="7" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="0"/></svg>
     <div class="c"><b id="rNum" class="num">${restTotal}</b><span>ثانية</span></div></div>
-    <div class="rtip">${pick(TIPS[d || 0])}</div>
-    <p class="rnext">${nextTxt}</p>
+    ${ref ? `<div class="rq">كيف كانت الجولة؟</div><div class="diff rdiff">${DIFF.map((l, di) => `<button data-v="${di + 1}" class="${d === di + 1 ? 'on' : ''}" onclick="A.restDiff(${di + 1})">${l}</button>`).join('')}</div>` : ''}
+    <div class="rtip" id="rtip">${pick(TIPS[d || 0])}</div>
+    <p class="rnext">${nextTxt}</p>${ref ? `<input class="setnote rnote" placeholder="ملاحظة على الجولة (اختياري)" oninput="A.restNote(this.value)">` : ''}
     <div class="btns"><button class="pill ghost" onclick="A.restAdd(30)">+30 ث</button><button class="pill dark" onclick="A.restSkip()">يلا أبدأ</button></div></div>`;
   r.classList.add('show'); clearInterval(restInt); restInt = setInterval(restTick, 200); restTick();
 }
@@ -1688,6 +1810,19 @@ const A = {
   sel(k) { UI.sel = k; render(); },
   wk(n) { UI.sel = addDays(UI.sel, n); render(); },
   settings: settingsSheet,
+  period(k) { periodSheet(k); },
+  extras(k) {
+    const draw = c => {
+      const D = day(k), st = (D.extra ||= { items: [] }), t = otherTotals(st);
+      c.body.innerHTML = `<p class="hint" style="margin:0 4px 10px">أي شي تاكلينه أو تشربينه برا الوجبات الأربع. المدربة عاطيتك 150 سعرة مفتوحة يوميًا لهالشي.</p>
+        <div class="card" style="padding:14px 16px"><div class="items">${st.items.map((it, ii) => `<div class="itm"><div class="tx"><b>${esc(it.n)}</b><span class="num">${it.g ? it.g + 'غ · ' : ''}${Math.round(it.k)} سعرة · ب ${r1(it.p)}</span></div><button class="mut" data-di="${ii}">${I.x.replace('<svg', '<svg width="14" height="14"')}</button></div>`).join('') || '<div class="empty" style="padding:10px 0">ما فيه إضافات اليوم</div>'}</div>
+        ${st.items.length ? `<div class="cmp ${t.k <= 150 ? 'good' : 'more'}">${t.k <= 150 ? `🌿 ${Math.round(t.k)} من 150 سعرة مفتوحة` : `تعديتي الـ150 المفتوحة بـ ${Math.round(t.k - 150)} سعرة`}</div>` : ''}
+        <div class="hint" style="margin:12px 2px 0">أضيفي صنف:</div>${adderHtml()}</div>`;
+      bindAdder(c.el, it => { st.items.push(it); Store.touch(k); draw(c); render(); });
+      $$('[data-di]', c.el).forEach(b => b.onclick = () => { st.items.splice(Number(b.dataset.di), 1); Store.touch(k); draw(c); render(); });
+    };
+    openSheet('إضافـات', '', draw);
+  },
   setF(k, f, v, rer) { const D = day(k); if (f === 'weight' || f === 'waist') v = num(v); D[f] = v; Store.touch(k); if (rer) render(); },
   /* تمرين */
   start(k) { if (k > todayKey()) { confirmSheet('تمرين يوم قادم', 'هذا اليوم ما جاء للحين. تبين تبدئين تمرينه الحين وينحفظ على تاريخه؟', 'ابدئي', () => startSession(k)); return; } startSession(k); },
@@ -1711,7 +1846,7 @@ const A = {
   setOk(id, i) {
     const s = sessionOf(sesKey), EX = exOf(s.w), e = EX.find(z => z.id === id), x = s.sets[id][i];
     unlockAudio();
-    if (x.ok) { x.ok = false; x.ed = false; Store.touch(sesKey); renderSession(); return; }
+    if (x.ok) { x.ed = false; Store.touch(sesKey); renderSession(); return; }
     const wi = $(`#in-${id}-${i}-w`), ri = $(`#in-${id}-${i}-r`);
     if (!x.w && !e.bw && wi?.placeholder && /\d/.test(wi.placeholder) && wi.placeholder !== '0') x.w = wi.placeholder;
     if (!x.r && ri?.placeholder) x.r = ri.placeholder;
@@ -1721,11 +1856,13 @@ const A = {
     if (nIn > -1) next = `الجاي: الجولة ${nIn + 1} من ${s.sets[id].length} · <span class="exn">${s.alt[id] ? (e.aen || e.alt) : e.en}</span>`;
     else for (let q = 1; q < EX.length; q++) { const z = EX[(ei + q) % EX.length]; if (s.sets[z.id].some(y => !y.ok)) { next = `التمرين الجاي: <span class="exn">${s.alt[z.id] ? (z.aen || z.alt) : z.en}</span>`; break; } }
     renderSession();
-    if (next) startRest(next, x.d);
-    else if (!s.cardio?.ok) { toast('خلصتي كل التمارين 💪 الحين الكارديو'); setTimeout(() => $('#cardioCard')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200); }
-    else this.celebrate();
+    if (exDone(s, id)) { const nx = EX.slice(ei + 1).find(z => !exDone(s, z.id)) || EX.find(z => !exDone(s, z.id)); setTimeout(() => (nx ? $('#ex-' + nx.id) : $('#cardioCard'))?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 350); }
+    if (next) startRest(next, x.d, [id, i]);
+    else { startRest(!s.cardio?.ok ? 'خلصتي كل التمارين 💪 الجاي: الكارديو' : 'خلصتي التمارين والكارديو كلها 🎉', x.d, [id, i]); if (s.cardio?.ok) this.celebrate(); }
   },
   celebrate() { toast('خلصتي التمارين والكارديو كلها 🎉 اضغطي «خلصت» للإطالة'); },
+  restDiff(v) { if (!RREF || !sesKey) return; const x = sessionOf(sesKey).sets[RREF[0]][RREF[1]]; x.d = v; Store.touch(sesKey); $$('.rdiff button').forEach(b => b.classList.toggle('on', Number(b.dataset.v) === v)); $('#rtip').textContent = pick(TIPS[v]); renderSession(); },
+  restNote(v) { if (!RREF || !sesKey) return; sessionOf(sesKey).sets[RREF[0]][RREF[1]].n = v; Store.touch(sesKey); },
   restAdd(n) { restEnd += n * 1000; restTotal += n; restTick(); },
   restSkip() { clearInterval(restInt); $('#rest').classList.remove('show'); },
   setAlt(id, v) { const s = sessionOf(sesKey); s.alt[id] = !!v; Store.touch(sesKey); renderSession(); },
@@ -1850,13 +1987,9 @@ const A = {
         ${st.st === 'other' ? (() => { const t = otherTotals(st), dk = Math.round(t.k - m.kcal), dp = Math.round(t.p - m.p); return `
           <div class="card" style="padding:14px 16px"><h3>وش أكلتي؟</h3><p class="hint" style="margin:2px 0 10px">أضيفي كل صنف لحاله بوزنه، وأحسب لك سعراته من جدول القيم الغذائية لكل 100غ.</p>
             <div class="items">${(st.items || []).map((it, ii) => `<div class="itm"><div class="tx"><b>${esc(it.n)}</b><span class="num">${it.g ? it.g + 'غ · ' : ''}${Math.round(it.k)} سعرة · ب ${r1(it.p)} · ك ${r1(it.c)} · د ${r1(it.f)}</span></div><button class="mut" data-di="${ii}" aria-label="حذف">${I.x.replace('<svg', '<svg width="14" height="14"')}</button></div>`).join('') || '<div class="empty" style="padding:10px 0">ما أضفتي أصناف للحين</div>'}</div>
-            <div class="additem"><input id="fq" placeholder="ابحثي: صدر دجاج، رز، تفاح…" autocomplete="off"><div id="fsug" class="fsug"></div>
-              <div id="fpick" style="display:none"><div class="fpick-h"><b id="fname"></b><span id="fper" class="num mut"></span></div>
-                <div class="gchips">${[30, 50, 100, 150, 200].map(g => `<button data-g="${g}">${g}غ</button>`).join('')}</div>
-                <div style="display:flex;gap:8px;margin-top:8px"><label class="inbox" style="flex:1"><input id="fg" inputmode="decimal" placeholder="0"><span>غرام</span></label><button class="pill dark" id="fadd" style="height:52px">أضيفي</button></div>
-                <div id="fcalc" class="num hint" style="margin-top:6px"></div></div>
-              <button class="addnote" id="fman" style="margin-top:8px">صنف مو موجود بالجدول؟ أضيفيه بنفسك</button>
-              <div id="fmanbox" style="display:none;margin-top:8px"><div class="field" style="background:#F4F5F7"><label>اسم الصنف</label><input id="mn"></div><div class="row2"><div class="field" style="background:#F4F5F7"><label>سعرات</label><input id="mk" class="num" inputmode="decimal"></div><div class="field" style="background:#F4F5F7"><label>بروتين (غ) اختياري</label><input id="mp" class="num" inputmode="decimal"></div></div><button class="pill dark block" id="madd">أضيفي</button></div></div>
+            <div class="estb"><div class="hint" style="margin:0 2px 6px">ما تعرفين الكمية؟ قارنيها بحجم وجبة الجدول:</div><div class="gchips est">${EST.map(([l, f]) => `<button data-est="${f}" data-l="${l}">${l}</button>`).join('')}</div></div>
+            <div class="hint" style="margin:12px 2px 0">أو أضيفي كل صنف لحاله:</div>
+            ${adderHtml()}
           </div>
           ${(st.items || []).length || st.kcal ? `<div class="card" style="padding:14px 16px"><div class="macros" style="margin:0"><div><b>${Math.round(t.k)}</b><span>سعرة</span></div><div><b>${Math.round(t.p)}g</b><span>بروتين</span></div><div><b>${Math.round(t.c)}g</b><span>كارب</span></div><div><b>${Math.round(t.f)}g</b><span>دهون</span></div></div>
             <div class="cmp ${dk <= 0 ? 'good' : 'more'}">${dk < 0 ? `🌿 أقل من وجبة الجدول بـ ${-dk} سعرة. يساعدك تقللين سعرات اليوم.` : dk === 0 ? 'نفس سعرات وجبة الجدول بالضبط 👌' : `أكثر من وجبة الجدول بـ ${dk} سعرة. عادي، وازنيها بباقي اليوم أو من الـ150 المفتوحة.`}</div>
@@ -1873,15 +2006,8 @@ const A = {
       if (st.st === 'other') {
         const keep = () => { st.note = $('#oTx').value; D.meals[slot] = st; };
         const addItem = it => { keep(); (st.items ||= []).push(it); D.meals[slot] = st; Store.touch(k); draw(c); render(); setTimeout(() => $('#fq')?.focus(), 50); };
-        let sel = null;
-        const calc = () => { const g = num($('#fg').value) || 0; $('#fcalc').textContent = sel && g ? `= ${Math.round(sel[1] * g / 100)} سعرة · ب ${r1(sel[2] * g / 100)} · ك ${r1(sel[3] * g / 100)} · د ${r1(sel[4] * g / 100)}` : ''; };
-        const choose = r => { sel = r; $('#fsug').innerHTML = ''; $('#fq').value = r[0]; $('#fpick').style.display = ''; $('#fname').textContent = r[0]; $('#fper').textContent = `لكل 100غ: ${r[1]} سعرة · ب ${r[2]}`; $('#fg').focus(); calc(); };
-        $('#fq').oninput = () => { sel = null; $('#fpick').style.display = 'none'; const res = refSearch($('#fq').value); $('#fsug').innerHTML = res.map((r, i) => `<button data-r="${i}"><b>${r[0]}</b><span class="num">${r[1]} سعرة/100غ</span></button>`).join('') || ($('#fq').value.trim() ? '<div class="hint" style="padding:8px 4px">ما لقيته بالجدول. أضيفيه بنفسك من الرابط تحت.</div>' : ''); $$('#fsug [data-r]').forEach(b => b.onclick = () => choose(res[Number(b.dataset.r)])); };
-        $$('[data-g]', c.el).forEach(b => b.onclick = () => { $('#fg').value = b.dataset.g; calc(); });
-        $('#fg').oninput = calc;
-        $('#fadd').onclick = () => { const g = num($('#fg').value); if (!sel || !g) { toast('اختاري الصنف واكتبي الوزن'); return; } addItem({ n: sel[0], g, k: sel[1] * g / 100, p: sel[2] * g / 100, c: sel[3] * g / 100, f: sel[4] * g / 100 }); };
-        $('#fman').onclick = () => { $('#fmanbox').style.display = ''; $('#mn').value = $('#fq').value; $('#mk').focus(); };
-        $('#madd').onclick = () => { const n = $('#mn').value.trim(), kk = num($('#mk').value); if (!n || kk == null) { toast('اكتبي الاسم والسعرات'); return; } addItem({ n, k: kk, p: num($('#mp').value) || 0, c: 0, f: 0, manual: 1 }); };
+        bindAdder(c.el, addItem);
+        $$('[data-est]', c.el).forEach(b => b.onclick = () => { const f = Number(b.dataset.est); addItem({ n: `تقدير: ${b.dataset.l} من «${m.name}»`, k: m.kcal * f, p: m.p * f, c: m.c * f, f: m.f * f, est: 1 }); });
         $$('[data-di]', c.el).forEach(b => b.onclick = () => { keep(); st.items.splice(Number(b.dataset.di), 1); Store.touch(k); draw(c); render(); });
         $('#oPh').onchange = async e => { const f = e.target.files[0]; if (!f) return; keep(); toast('جاري حفظ الصورة…'); const ph = await savePhoto(f); if (ph) { st.ph = ph; D.meals[slot] = st; Store.touch(k); draw(c); render(); } };
         $('#oSave').onclick = () => { keep(); Store.touch(k); render(); c.close(); toast('انحفظ ✓'); };
@@ -1984,6 +2110,55 @@ function settingsSheet() {
     };
   };
   openSheet('الإعـدادات', '', draw);
+}
+
+/* ===== الدورة الشهرية ===== */
+const SYMS = ['تقلصات', 'انتفاخ', 'صداع', 'تعب', 'مزاج متقلب', 'حب شباب', 'رغبة بالحلا', 'ألم ظهر'];
+function cycles() {
+  const ks = Object.keys(S.days).filter(k => S.days[k].period).sort(); const out = [];
+  for (const k of ks) { const l = out[out.length - 1]; if (l && diffDays(l.end, k) <= 2) l.end = k; else out.push({ start: k, end: k }); }
+  out.forEach(c => c.len = diffDays(c.start, c.end) + 1);
+  return out;
+}
+function cycleInfo(today = todayKey()) {
+  const cs = cycles(); if (!cs.length) return null;
+  const gaps = []; for (let i = 1; i < cs.length; i++) { const g = diffDays(cs[i - 1].start, cs[i].start); if (g >= 18 && g <= 45) gaps.push(g); }
+  const avg = gaps.length ? Math.round(gaps.reduce((a, b) => a + b, 0) / gaps.length) : 28;
+  const pl = Math.round(cs.slice(-6).reduce((a, c) => a + c.len, 0) / Math.min(6, cs.length)) || 5;
+  const last = [...cs].reverse().find(c => c.start <= today) || cs[cs.length - 1];
+  const cd = diffDays(last.start, today) + 1; let next = addDays(last.start, avg); while (next <= today && cd > avg + 7 && false) next = addDays(next, avg);
+  const inP = !!peek(today).period;
+  const ov = avg - 14;
+  const phase = inP ? ['الدورة', 'خففي الوزن لو تحتاجين، والحركة الخفيفة تقلل التقلصات.'] : cd < ov - 2 ? ['المرحلة الجريبية', 'الطاقة عادة أعلى هالفترة، استغليها في التمارين الأساسية.'] : cd <= ov + 1 ? ['الإباضة تقريبًا', 'تقديرية، والفروق بين البنات كبيرة. جسمك هو المقياس.'] : ['المرحلة الأصفرية', 'آخر أيامها ممكن يزيد الوزن كيلو أو اثنين ماء. لا تبنين عليه قرار.'];
+  const untilNext = diffDays(today, next);
+  return { cs, avg, pl, last, cd, next, untilNext, phase, inP, gapsN: gaps.length, preWeight: (untilNext >= 0 && untilNext <= 5) || inP };
+}
+function periodSheet(sel = todayKey()) {
+  const st = { m: sel.slice(0, 7), sel };
+  const draw = c => {
+    const ci = cycleInfo(); const t = todayKey();
+    const [y, m] = st.m.split('-').map(Number); const first = new Date(y, m - 1, 1), nD = new Date(y, m, 0).getDate();
+    const pred = new Set(); if (ci) for (let i = 0; i < ci.pl; i++) pred.add(addDays(ci.next, i));
+    let g = DAYS_S.map(d => `<div class="dn">${d}</div>`).join(''); for (let i = 0; i < first.getDay(); i++) g += '<div></div>';
+    for (let d = 1; d <= nD; d++) { const k = `${y}-${pad(m)}-${pad(d)}`, on = !!peek(k).period; g += `<button class="pc ${on ? 'on' : ''} ${!on && pred.has(k) ? 'pred' : ''} ${k === t ? 'today' : ''} ${k === st.sel ? 'sel' : ''}" data-k="${k}">${d}${(peek(k).sym || []).length ? '<i></i>' : ''}</button>`; }
+    const D = peek(st.sel), sy = D.sym || [];
+    c.body.innerHTML = `<div class="card hero" style="min-height:170px">${orbs('sleep')}<div>
+        ${ci ? `<div class="tag">${ci.phase[0]}</div><div class="clock">اليوم ${ci.cd}</div><div class="meta">${ci.inP ? 'من الدورة' : ci.untilNext > 0 ? `الدورة المتوقعة بعد ${ci.untilNext} يوم · ${fmtLong(ci.next)}` : ci.untilNext === 0 ? 'الدورة متوقعة اليوم' : `تأخرت ${-ci.untilNext} يوم عن المتوقع`}</div>` : `<div class="tag">الدورة الشهرية</div><div class="big" style="font-size:34px">سجّلي أول دورة</div><div class="meta">اضغطي على أيام الدورة في التقويم تحت</div>`}</div></div>
+      ${ci ? `<div class="note" style="margin-bottom:12px">💡 ${ci.phase[1]}</div><div class="stats" style="margin-bottom:12px"><div><b>${ci.avg}</b><span>طول الدورة${ci.gapsN ? '' : ' (افتراضي)'}</span></div><div><b>${ci.pl}</b><span>أيام النزول</span></div><div><b>${ci.cs.length}</b><span>دورات مسجّلة</span></div></div>` : ''}
+      <div class="row2" style="margin-bottom:12px"><button class="pill dark" id="pStartT">${peek(t).period ? 'اليوم من أيام الدورة ✓' : 'بدأت الدورة اليوم'}</button><button class="pill" style="background:#fff" id="pEndT">خلصت</button></div>
+      <div class="card"><div class="cal-h"><button class="iconbtn" style="width:34px;height:34px" id="pPrev">${I.chevR}</button><b>${MONTHS[m - 1]} ${y}</b><button class="iconbtn" style="width:34px;height:34px" id="pNext">${I.chevL}</button></div>
+        <div class="pcal">${g}</div><div class="legend"><span><i style="background:#FF5A8A"></i>أيام الدورة</span><span><i style="box-shadow:inset 0 0 0 1.5px #FF5A8A;background:#FFF0F4"></i>متوقعة</span><span>اضغطي على يوم لتسجيله أو إلغائه</span></div></div>
+      <div class="card"><h3>أعراض ${st.sel === t ? 'اليوم' : fmtLong(st.sel)}</h3><div class="chips" style="margin-top:10px">${SYMS.map(x => `<button class="chip ${sy.includes(x) ? 'on' : ''}" style="background:${sy.includes(x) ? '' : '#F2F3F5'}" data-s="${x}">${x}</button>`).join('')}</div></div>
+      ${ci && ci.cs.length ? `<div class="card"><h3>السجل</h3><table class="tbl" style="margin-top:6px">${[...ci.cs].reverse().slice(0, 8).map((cy, i, arr) => { const nx = ci.cs[ci.cs.indexOf(cy) + 1]; return `<tr><td>${fmtLong(cy.start)}</td><td style="font-family:var(--ar)">${cy.len} أيام${nx ? ' · دورة ' + diffDays(cy.start, nx.start) + ' يوم' : ''}</td></tr>`; }).join('')}</table></div>` : ''}
+      <p class="hint">التوقعات تقديرية من سجلك، وتتحسن كل ما سجلتي أكثر. غياب الدورة 3 شهور مع التمرين أو الأكل القليل يستاهل مراجعة طبيبة.</p>`;
+    $$('[data-k]', c.el).forEach(b => b.onclick = () => { const k = b.dataset.k; if (st.sel === k || !peek(k).period) { const D2 = day(k); D2.period = !D2.period; Store.touch(k); render(); } st.sel = k; draw(c); });
+    $$('[data-s]', c.el).forEach(b => b.onclick = () => { const D2 = day(st.sel); const a = (D2.sym ||= []); const i = a.indexOf(b.dataset.s); i > -1 ? a.splice(i, 1) : a.push(b.dataset.s); Store.touch(st.sel); draw(c); });
+    $('#pPrev').onclick = () => { const d = new Date(y, m - 2, 1); st.m = `${d.getFullYear()}-${pad(d.getMonth() + 1)}`; draw(c); };
+    $('#pNext').onclick = () => { const d = new Date(y, m, 1); st.m = `${d.getFullYear()}-${pad(d.getMonth() + 1)}`; draw(c); };
+    $('#pStartT').onclick = () => { day(t).period = true; Store.touch(t); render(); draw(c); toast('انسجّل 🌸'); };
+    $('#pEndT').onclick = () => { day(t).period = false; Store.touch(t); render(); draw(c); toast('تم ✓'); };
+  };
+  openSheet('الدورة الشهريـة', '', draw);
 }
 
 /* ===== التشغيل ===== */
