@@ -207,7 +207,7 @@ $('chk').onclick=()=>{let ok=true;document.querySelectorAll('.slot').forEach((b,
   else{$('fb1').textContent='فيه أسماء بغير مكانها، صحّحها وجرّب مرة ثانية';setTimeout(()=>{place.forEach((p,i)=>{if(p!==i)place[i]=null});drawS1()},1100)}};
 
 /* step 2 */
-function drawS2(){const o=[["خالد الفيصل",0],["بدر بن عبدالمحسن",1],["الأمير عبدالله الفيصل",0]];
+function drawS2(){const o=[["خالد الفيصل",0],["بدر بن عبدالمحسن",1],["عبدالله الفيصل",0]];
   $('opts').innerHTML=o.map(([t,k])=>`<button data-k="${k}">${t}</button>`).join('');
   document.querySelectorAll('#opts button').forEach(b=>b.onclick=()=>{if(+b.dataset.k){b.classList.add('yes');setTimeout(()=>stage('s3'),800)}else{b.classList.add('no');$('fb2').textContent='قريبة… جرّب مرة ثانية';setTimeout(()=>b.classList.remove('no'),500)}})}
 
